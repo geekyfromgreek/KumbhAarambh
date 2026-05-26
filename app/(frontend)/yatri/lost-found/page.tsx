@@ -61,6 +61,7 @@ export default function LostFoundPage() {
   const [imagePreset, setImagePreset] = useState("wallet");
   const [customImageUrl, setCustomImageUrl] = useState("");
   const [formSuccess, setFormSuccess] = useState(false);
+  const [uploading, setUploading] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
 
   const presets: Record<string, string> = {
@@ -482,20 +483,46 @@ export default function LostFoundPage() {
                   </div>
 
                   <div className="space-y-1">
-                    <label className="text-[9px] font-bold text-on-surface-variant uppercase tracking-wider">Custom Image URL (Optional)</label>
-                    <div className="relative">
-                      <ImageIcon size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-outline" />
-                      <input
-                        type="url"
-                        value={customImageUrl}
-                        onChange={(e) => {
-                          setCustomImageUrl(e.target.value);
-                          setImagePreset("");
-                        }}
-                        placeholder="https://example.com/item-image.jpg"
-                        className="w-full pl-9 pr-3 py-2.5 bg-surface-container-low border border-outline-variant/30 rounded-lg text-xs outline-none focus:ring-1 focus:ring-primary focus:border-primary"
-                      />
+                    <label className="text-[9px] font-bold text-on-surface-variant uppercase tracking-wider">Upload Item Image (Optional)</label>
+                    <div className="flex items-center gap-3">
+                      <label className="flex items-center justify-center gap-2 px-4 py-2.5 bg-surface-container-low border border-outline-variant/30 rounded-lg text-xs font-bold text-on-surface-variant hover:text-primary hover:border-primary/50 transition-colors cursor-pointer w-full">
+                        <ImageIcon size={14} />
+                        {customImageUrl ? "Change Image" : "Choose Image File"}
+                        <input
+                          type="file"
+                          accept="image/*"
+                          onChange={(e) => {
+                            const file = e.target.files?.[0];
+                            if (file) {
+                              setUploading(true);
+                              const reader = new FileReader();
+                              reader.onloadend = () => {
+                                setCustomImageUrl(reader.result as string);
+                                setImagePreset("");
+                                setUploading(false);
+                              };
+                              reader.readAsDataURL(file);
+                            }
+                          }}
+                          className="hidden"
+                        />
+                      </label>
                     </div>
+                    {uploading && (
+                      <p className="text-[9px] text-primary animate-pulse font-bold mt-1">Processing image...</p>
+                    )}
+                    {customImageUrl && (
+                      <div className="mt-2 relative w-16 h-16 rounded-lg overflow-hidden border border-outline-variant/20">
+                        <img src={customImageUrl} alt="Preview" className="w-full h-full object-cover" />
+                        <button
+                          type="button"
+                          onClick={() => setCustomImageUrl("")}
+                          className="absolute top-0.5 right-0.5 bg-black/75 text-white w-4 h-4 rounded-full flex items-center justify-center text-[8px] font-bold cursor-pointer"
+                        >
+                          ✕
+                        </button>
+                      </div>
+                    )}
                   </div>
 
                   <button
