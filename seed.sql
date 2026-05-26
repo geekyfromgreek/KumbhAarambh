@@ -174,15 +174,15 @@ TRUNCATE TABLE lost_items CASCADE;
 
 -- SEED GHATS
 INSERT INTO ghats (id, name, crowd_level, flag_color, "desc", lat, lng, flow_speed, last_updated) VALUES
-('ghat-1', 'Ram Kund (Main Ghat)', 'HIGH', 'RED', 'Holy spot of Asthi Visarjan. High crowd density due to auspicious bathing hour. RTO restrictions active.', 20.0092, 73.7915, '1.2 m/s (Fast)', '5 mins ago'),
-('ghat-2', 'Talkuteshwar Ghat', 'MODERATE', 'YELLOW', 'Bathing ghat downstream. Moderate crowds. Ideal for families looking for peaceful holy dip.', 20.0158, 73.7995, '0.8 m/s (Moderate)', '12 mins ago'),
-('ghat-3', 'Lakshman Kund', 'LOW', 'GREEN', 'Spacious bathing site with dedicated volunteers and security barricades. Highly recommended.', 20.0078, 73.7885, '0.5 m/s (Calm)', '20 mins ago'),
-('ghat-4', 'Kushavarta Kund', 'HIGH', 'RED', 'The sacred source of the Godavari river in Trimbakeshwar. Extremely crowded during Shahi Snan.', 19.9324, 73.5303, '0.2 m/s (Still)', '10 mins ago'),
-('ghat-5', 'Ahilya Godavari Sangam Ghat', 'MODERATE', 'YELLOW', 'Confluence of rivers. Great alternative for pilgrims wanting to avoid the Ram Kund rush.', 20.0069, 73.7850, '0.9 m/s (Moderate)', '15 mins ago'),
-('ghat-6', 'Someshwar Ghat', 'LOW', 'GREEN', 'Serene bathing spot near Someshwar Temple. Scenic, clean, and highly secure for elderly.', 19.9855, 73.7310, '0.6 m/s (Calm)', '1 hour ago'),
-('ghat-7', 'Sita Kund', 'LOW', 'GREEN', 'A quiet, sacred pool situated near Sita Gufa in Tapovan. Frequented by devotees looking for serene prayers.', 20.0135, 73.7858, '0.3 m/s (Still)', '15 mins ago'),
-('ghat-8', 'Surya Kund', 'MODERATE', 'YELLOW', 'Bathing pond dedicated to the Sun God. Located downstream on the Panchavati riverbanks.', 20.0098, 73.7930, '0.7 m/s (Moderate)', '30 mins ago'),
-('ghat-9', 'Ahilya Kund', 'LOW', 'GREEN', 'Sacred tank near the main Godavari flow named after Queen Ahilyabai Holkar. Clean and well-barricaded.', 20.0089, 73.7908, '0.4 m/s (Calm)', '45 mins ago'),
+('ghat-1', 'Ram Kund (Main Ghat)', 'HIGH', 'RED', 'Holy spot of Asthi Visarjan. High crowd density due to auspicious bathing hour. RTO restrictions active.', 20.0062, 73.7885, '1.2 m/s (Fast)', '5 mins ago'),
+('ghat-2', 'Talkuteshwar Ghat', 'MODERATE', 'YELLOW', 'Bathing ghat downstream. Moderate crowds. Ideal for families looking for peaceful holy dip.', 20.0098, 73.7990, '0.8 m/s (Moderate)', '12 mins ago'),
+('ghat-3', 'Lakshman Kund', 'LOW', 'GREEN', 'Spacious bathing site with dedicated volunteers and security barricades. Highly recommended.', 20.0075, 73.7885, '0.5 m/s (Calm)', '20 mins ago'),
+('ghat-4', 'Kushavarta Kund', 'HIGH', 'RED', 'The sacred source of the Godavari river in Trimbakeshwar. Extremely crowded during Shahi Snan.', 19.9327, 73.5277, '0.2 m/s (Still)', '10 mins ago'),
+('ghat-5', 'Ahilya Godavari Sangam Ghat', 'MODERATE', 'YELLOW', 'Confluence of rivers. Great alternative for pilgrims wanting to avoid the Ram Kund rush.', 19.9304, 73.5272, '0.9 m/s (Moderate)', '15 mins ago'),
+('ghat-6', 'Someshwar Ghat', 'LOW', 'GREEN', 'Serene bathing spot near Someshwar Temple. Scenic, clean, and highly secure for elderly.', 19.9964, 73.7466, '0.6 m/s (Calm)', '1 hour ago'),
+('ghat-7', 'Sita Kund', 'LOW', 'GREEN', 'A quiet, sacred pool situated near Sita Gufa in Tapovan. Frequented by devotees looking for serene prayers.', 20.0069, 73.7950, '0.3 m/s (Still)', '15 mins ago'),
+('ghat-8', 'Surya Kund', 'MODERATE', 'YELLOW', 'Bathing pond dedicated to the Sun God. Located downstream on the Panchavati riverbanks.', 20.0065, 73.7892, '0.7 m/s (Moderate)', '30 mins ago'),
+('ghat-9', 'Ahilya Kund', 'LOW', 'GREEN', 'Sacred tank near the main Godavari flow named after Queen Ahilyabai Holkar. Clean and well-barricaded.', 20.0060, 73.7889, '0.4 m/s (Calm)', '45 mins ago'),
 ('ghat-10', 'Gautama Kund', 'MODERATE', 'YELLOW', 'Sacred pond near Trimbakeshwar Temple. Believed to be where Sage Gautama performed penance to bring the Godavari down.', 19.9332, 73.5315, '0.2 m/s (Still)', '10 mins ago');
 
 -- SEED FOOD SPOTS (Street stalls, Chaat corners, Thalis, and Restaurants)
