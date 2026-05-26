@@ -202,8 +202,8 @@ INSERT INTO stays (title, category, price, address, lat, lng, rating, amenities,
 ('Kalaram Heritage Inn', 'homestay', '₹750 / night', 'Wagh Lane, Near Kalaram Temple, Panchavati, Nashik', 20.0118, 73.7892, 4.7, '{"AC Options", "Local Guide", "Clean Linen", "Attached Bath"}', 'A traditional family-run homestay situated in a heritage Nashik wada. Highly praised for warm local hospitality and guide services.', 22);
 
 -- SEED LOST ITEMS
-INSERT INTO lost_items (title, description, location_name, lat, lng, reporter_name, reporter_role, status) VALUES
-('Black Leather Wallet', 'Contains Aadhaar card and driving license under the name Amit Sharma. Lost near Ram Kund bathing steps.', 'Ram Kund (Main Ghat)', 20.0092, 73.7915, 'Amit Sharma', 'YATRI', 'LOST'),
-('Gold Chain (5 grams)', 'Found a thin gold chain near the changing rooms of Talkuteshwar Ghat. Handed over to police booth #4.', 'Talkuteshwar Ghat', 20.0158, 73.7995, 'Rajesh Patil', 'NASHIKKAR', 'FOUND'),
-('Red Backpack (Skybags)', 'Contains spiritual books, water bottle, and some clothing. Left behind on the benches near Lakshman Kund.', 'Lakshman Kund', 20.0078, 73.7885, 'Sunita Deshmukh', 'YATRI', 'LOST');
+INSERT INTO lost_items (title, description, location_name, lat, lng, image_url, reporter_name, reporter_role, status) VALUES
+('Milton Metal Water Flask', 'Left behind a silver Milton stainless steel water flask near the shoe stalls of Ram Kund during morning snan.', 'Ram Kund (Main Ghat)', 20.0092, 73.7915, 'https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=500&q=80', 'Amit Sharma', 'YATRI', 'LOST'),
+('Brass Keyring with 3 Keys', 'Found a bunch of keys on a brass keychain showing a Lord Ganesha emblem near the floral decoration stalls of Talkuteshwar.', 'Talkuteshwar Ghat', 20.0158, 73.7995, 'https://images.unsplash.com/photo-1582139329536-e7284fece509?w=500&q=80', 'Rajesh Patil', 'NASHIKKAR', 'FOUND'),
+('Brown Leather Sling Bag', 'Found a brown leather sling bag containing keys, a small notebook, and a pair of reading glasses on the seating benches.', 'Lakshman Kund', 20.0078, 73.7885, 'https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=500&q=80', 'Sunita Deshmukh', 'YATRI', 'LOST');
 
