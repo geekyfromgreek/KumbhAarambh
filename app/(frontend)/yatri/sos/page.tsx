@@ -241,20 +241,25 @@ export default function EmergencySos() {
             {[
               { label: "Kumbh Central Control Room", num: "1912", sub: "General pilgrim guidance & missing logs" },
               { label: "Ambulance & Medical Desk", num: "108", sub: "Direct dispatch to nearest camp clinic" },
-              { label: "Nashik City Police Control", num: "112", sub: "Emergency police helpline" }
+              { label: "Police Control Room", num: "112", sub: "Universal emergency services" },
+              { label: "Women Safety Cell", num: "1091", sub: "Dedicated safety assistance for women" },
+              { label: "Disaster Management Desk", num: "0253-2227128", sub: "Local stampede, flood, and rescue ops" },
+              { label: "Nashik Tourist Police Cell", num: "0253-2305200", sub: "Visitor security and guide assistance" },
+              { label: "Fire & Rescue Services", num: "101", sub: "Immediate fire emergency dispatch" },
+              { label: "Railway Enquiry (Mela Specials)", num: "139", sub: "Transit updates & special train logs" }
             ].map((helpline) => (
               <a
                 key={helpline.num}
                 href={`tel:${helpline.num}`}
                 className="p-3 bg-surface-container-low border border-outline-variant/10 rounded-xl flex items-center justify-between hover:border-primary/50 transition-colors cursor-pointer group"
               >
-                <div>
+                <div className="pr-4 flex-1">
                   <h4 className="text-xs font-bold text-on-surface group-hover:text-primary transition-colors">
                     {helpline.label}
                   </h4>
                   <p className="text-[10px] text-on-surface-variant mt-0.5">{helpline.sub}</p>
                 </div>
-                <span className="text-xs font-extrabold text-primary bg-primary-fixed/40 px-3 py-1.5 rounded-lg border border-primary/10">
+                <span className="text-[11px] font-extrabold text-primary bg-primary-fixed/40 px-2.5 py-1.5 rounded-lg border border-primary/10 shrink-0">
                   📞 {helpline.num}
                 </span>
               </a>
