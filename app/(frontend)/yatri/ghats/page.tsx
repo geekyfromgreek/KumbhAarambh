@@ -449,17 +449,16 @@ export default function GhatsMonitor() {
           <>
             <motion.div
               initial={{ opacity: 0 }}
-              animate={{ opacity: 0.5 }}
+              animate={{ opacity: 0.6 }}
               exit={{ opacity: 0 }}
               onClick={() => setSelectedGhat(null)}
-              className="fixed inset-0 bg-black z-50"
+              className="fixed inset-0 bg-black z-[1200]"
             />
             <motion.div
-              initial={{ y: "100%" }}
-              animate={{ y: 0 }}
-              exit={{ y: "100%" }}
-              transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-surface rounded-t-3xl p-6 z-50 border-t border-outline-variant/30 sacred-shadow-lg"
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-sm bg-surface rounded-2xl p-6 z-[1300] border border-outline-variant/30 sacred-shadow-lg"
             >
               <div className="flex justify-between items-start mb-4">
                 <span className={`text-[10px] font-extrabold uppercase px-2.5 py-1 rounded border ${
@@ -488,7 +487,7 @@ export default function GhatsMonitor() {
                   </p>
                 </div>
 
-                <div className="p-4 bg-surface-container-low rounded-xl border border-outline-variant/15 space-y-2">
+                <div className="p-4 bg-surface-container-low rounded-xl border border-outline-variant/15 space-y-2 text-left">
                   <p className="text-xs text-on-surface-variant leading-relaxed">
                     {selectedGhat.desc}
                   </p>
@@ -504,7 +503,7 @@ export default function GhatsMonitor() {
                   </div>
                 </div>
 
-                <div className="p-3 bg-primary-fixed/20 border border-primary/10 rounded-xl flex gap-3 text-xs">
+                <div className="p-3 bg-primary-fixed/20 border border-primary/10 rounded-xl flex gap-3 text-xs text-left">
                   <Info size={18} className="text-primary shrink-0" />
                   <p className="text-on-surface-variant leading-relaxed">
                     Always consult local lifesavers and check safety lines before taking a dip in the River Godavari.
@@ -531,16 +530,16 @@ export default function GhatsMonitor() {
           <>
             <motion.div
               initial={{ opacity: 0 }}
-              animate={{ opacity: 0.5 }}
+              animate={{ opacity: 0.6 }}
               exit={{ opacity: 0 }}
               onClick={() => setShowLoginPrompt(false)}
-              className="fixed inset-0 bg-black z-[80]"
+              className="fixed inset-0 bg-black z-[1200]"
             />
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-sm bg-surface rounded-2xl p-6 z-[80] sacred-shadow-lg border border-outline-variant/30 text-center space-y-4"
+              className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-sm bg-surface rounded-2xl p-6 z-[1300] sacred-shadow-lg border border-outline-variant/30 text-center space-y-4"
             >
               <div className="w-14 h-14 bg-primary-fixed rounded-full flex items-center justify-center mx-auto border border-primary/20">
                 <LogIn size={24} className="text-primary" />
