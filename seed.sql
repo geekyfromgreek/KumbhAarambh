@@ -94,14 +94,9 @@ CREATE TABLE IF NOT EXISTS lost_items (
     created_at TIMESTAMPTZ DEFAULT now()
 );
 
--- Enable Realtime subscriptions for all tables
-alter publication supabase_realtime add table stays;
-alter publication supabase_realtime add table bookings;
-alter publication supabase_realtime add table food_spots;
-alter publication supabase_realtime add table reviews;
-alter publication supabase_realtime add table ghats;
-alter publication supabase_realtime add table overcharge_reports;
-alter publication supabase_realtime add table lost_items;
+-- Enable Realtime subscriptions for all tables (safe drop-and-readd to avoid duplicate membership errors)
+alter publication supabase_realtime drop table if exists stays, bookings, food_spots, reviews, ghats, overcharge_reports, lost_items;
+alter publication supabase_realtime add table stays, bookings, food_spots, reviews, ghats, overcharge_reports, lost_items;
 
 -- Enable RLS on all tables
 ALTER TABLE stays ENABLE ROW LEVEL SECURITY;
