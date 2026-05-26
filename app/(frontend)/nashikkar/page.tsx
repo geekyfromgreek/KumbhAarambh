@@ -406,6 +406,16 @@ export default function NashikkarDashboard() {
       action: () => router.push("/yatri/scams")
     },
     {
+      title: "Lost & Found",
+      hindi: "खोया और पाया",
+      desc: "Report found pilgrim items, view active logs, and verify claims",
+      icon: "find_in_page",
+      color: "from-purple-600 to-pink-600",
+      count: null,
+      countLabel: "",
+      action: () => router.push("/yatri/lost-found")
+    },
+    {
       title: "Add Stay Listing",
       hindi: "निवास जोड़ें",
       desc: "Register new pilgrim accommodations for the Stay Finder",
@@ -682,6 +692,13 @@ export default function NashikkarDashboard() {
                       rotate: [0, -10, 10, -10, 10, 0],
                       scale: [1, 1.25, 0.9, 1.15, 1],
                       transition: { duration: 0.5, ease: "easeInOut" }
+                    }
+                  },
+                  find_in_page: {
+                    hover: {
+                      scale: [1, 1.15, 1],
+                      y: [0, -4, 0],
+                      transition: { duration: 0.4, ease: "easeOut" }
                     }
                   }
                 };
