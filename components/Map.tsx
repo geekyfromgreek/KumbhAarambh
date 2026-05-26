@@ -9,7 +9,7 @@ interface MarkerData {
   lat: number;
   lng: number;
   price?: string;
-  type?: "stay" | "food" | "ghat" | "sos";
+  type?: "stay" | "food" | "ghat" | "sos" | "lost_found";
   status?: string;
 }
 
@@ -99,6 +99,9 @@ export default function Map({ center, zoom, markers, onMarkerClick }: MapProps) 
       } else if (marker.type === "sos") {
         markerColor = "#ba1a1a"; // SOS red
         markerIcon = "warning";
+      } else if (marker.type === "lost_found") {
+        markerColor = marker.status === "LOST" ? "#ba1a1a" : "#8e24aa"; // red for lost, purple for found
+        markerIcon = "search";
       }
 
       // Create a premium custom glowing SVG marker icon

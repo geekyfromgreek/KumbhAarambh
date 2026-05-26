@@ -79,6 +79,21 @@ CREATE TABLE IF NOT EXISTS overcharge_reports (
     timestamp TEXT NOT NULL
 );
 
+-- 7. LOST ITEMS TABLE
+CREATE TABLE IF NOT EXISTS lost_items (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    title TEXT NOT NULL,
+    description TEXT NOT NULL,
+    location_name TEXT NOT NULL,
+    lat DOUBLE PRECISION NOT NULL,
+    lng DOUBLE PRECISION NOT NULL,
+    image_url TEXT,
+    reporter_name TEXT NOT NULL,
+    reporter_role TEXT NOT NULL CHECK (reporter_role IN ('YATRI', 'NASHIKKAR')),
+    status TEXT NOT NULL DEFAULT 'LOST' CHECK (status IN ('LOST', 'FOUND', 'CLAIMED')),
+    created_at TIMESTAMPTZ DEFAULT now()
+);
+
 -- Enable Realtime subscriptions for all tables
 alter publication supabase_realtime add table stays;
 alter publication supabase_realtime add table bookings;
@@ -86,6 +101,7 @@ alter publication supabase_realtime add table food_spots;
 alter publication supabase_realtime add table reviews;
 alter publication supabase_realtime add table ghats;
 alter publication supabase_realtime add table overcharge_reports;
+alter publication supabase_realtime add table lost_items;
 
 -- Enable RLS on all tables
 ALTER TABLE stays ENABLE ROW LEVEL SECURITY;
@@ -94,6 +110,7 @@ ALTER TABLE food_spots ENABLE ROW LEVEL SECURITY;
 ALTER TABLE reviews ENABLE ROW LEVEL SECURITY;
 ALTER TABLE ghats ENABLE ROW LEVEL SECURITY;
 ALTER TABLE overcharge_reports ENABLE ROW LEVEL SECURITY;
+ALTER TABLE lost_items ENABLE ROW LEVEL SECURITY;
 
 -- Public READ access for all tables (anyone can view)
 CREATE POLICY "Public read stays" ON stays FOR SELECT USING (true);
@@ -102,6 +119,7 @@ CREATE POLICY "Public read food_spots" ON food_spots FOR SELECT USING (true);
 CREATE POLICY "Public read reviews" ON reviews FOR SELECT USING (true);
 CREATE POLICY "Public read ghats" ON ghats FOR SELECT USING (true);
 CREATE POLICY "Public read overcharge_reports" ON overcharge_reports FOR SELECT USING (true);
+CREATE POLICY "Public read lost_items" ON lost_items FOR SELECT USING (true);
 
 -- Public INSERT access for user-submitted data
 CREATE POLICY "Public insert reviews" ON reviews FOR INSERT WITH CHECK (true);
@@ -109,15 +127,19 @@ CREATE POLICY "Public insert bookings" ON bookings FOR INSERT WITH CHECK (true);
 CREATE POLICY "Public insert overcharge_reports" ON overcharge_reports FOR INSERT WITH CHECK (true);
 CREATE POLICY "Public insert stays" ON stays FOR INSERT WITH CHECK (true);
 CREATE POLICY "Public insert food_spots" ON food_spots FOR INSERT WITH CHECK (true);
+CREATE POLICY "Public insert lost_items" ON lost_items FOR INSERT WITH CHECK (true);
 
 -- Public UPDATE for ghats (crowd status updates from Nashikkar)
 CREATE POLICY "Public update ghats" ON ghats FOR UPDATE USING (true) WITH CHECK (true);
 CREATE POLICY "Public update bookings" ON bookings FOR UPDATE USING (true) WITH CHECK (true);
+CREATE POLICY "Public update lost_items" ON lost_items FOR UPDATE USING (true) WITH CHECK (true);
 
 -- Clean existing seeds (optional but safe)
 TRUNCATE TABLE stays CASCADE;
 TRUNCATE TABLE food_spots CASCADE;
 TRUNCATE TABLE ghats CASCADE;
+TRUNCATE TABLE lost_items CASCADE;
+
 
 -- SEED GHATS
 INSERT INTO ghats (id, name, crowd_level, flag_color, "desc", lat, lng, flow_speed, last_updated) VALUES
@@ -178,3 +200,10 @@ INSERT INTO stays (title, category, price, address, lat, lng, rating, amenities,
 ('Trimbakeshwar Shiva Krupa Lodge', 'guesthouse', '₹450 / night', 'Main Bazar Street, Trimbakeshwar', 19.9320, 73.5285, 4.3, '{"Attached Bath", "24hr Water", "Fan"}', 'An economical lodge located just 2 minutes away from Trimbakeshwar Temple. Popular among backpackers and budget travellers.', 21),
 ('Godavari View Lodge', 'guesthouse', '₹550 / night', 'Panchavati Bridge Road, Nashik', 20.0075, 73.7870, 4.4, '{"Water Purifier", "CCTV Security", "Attached Toilet"}', 'Budget lodge facing the holy Godavari river. Close to all shopping bazaars and local bus stands.', 17),
 ('Kalaram Heritage Inn', 'homestay', '₹750 / night', 'Wagh Lane, Near Kalaram Temple, Panchavati, Nashik', 20.0118, 73.7892, 4.7, '{"AC Options", "Local Guide", "Clean Linen", "Attached Bath"}', 'A traditional family-run homestay situated in a heritage Nashik wada. Highly praised for warm local hospitality and guide services.', 22);
+
+-- SEED LOST ITEMS
+INSERT INTO lost_items (title, description, location_name, lat, lng, reporter_name, reporter_role, status) VALUES
+('Black Leather Wallet', 'Contains Aadhaar card and driving license under the name Amit Sharma. Lost near Ram Kund bathing steps.', 'Ram Kund (Main Ghat)', 20.0092, 73.7915, 'Amit Sharma', 'YATRI', 'LOST'),
+('Gold Chain (5 grams)', 'Found a thin gold chain near the changing rooms of Talkuteshwar Ghat. Handed over to police booth #4.', 'Talkuteshwar Ghat', 20.0158, 73.7995, 'Rajesh Patil', 'NASHIKKAR', 'FOUND'),
+('Red Backpack (Skybags)', 'Contains spiritual books, water bottle, and some clothing. Left behind on the benches near Lakshman Kund.', 'Lakshman Kund', 20.0078, 73.7885, 'Sunita Deshmukh', 'YATRI', 'LOST');
+

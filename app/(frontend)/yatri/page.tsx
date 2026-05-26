@@ -180,6 +180,15 @@ export default function YatriHome() {
       route: "/yatri/chatbot",
       color: "border-blue-500/20 hover:border-blue-500",
       badge: "24/7 Active"
+    },
+    {
+      title: "Lost & Found",
+      hindi: "खोया और पाया",
+      desc: "Report lost objects or view found items with GPS mapping.",
+      icon: "find_in_page",
+      route: "/yatri/lost-found",
+      color: "border-purple-500/20 hover:border-purple-500",
+      badge: "Real-Time"
     }
   ];
 
@@ -314,6 +323,13 @@ export default function YatriHome() {
                       y: [0, -5, 0, -2, 0],
                       scale: [1, 1.2, 1],
                       transition: { duration: 0.6, ease: "easeInOut" }
+                    }
+                  },
+                  find_in_page: {
+                    hover: {
+                      scale: [1, 1.2, 0.95, 1.1, 1],
+                      rotate: [0, 10, -10, 5, 0],
+                      transition: { duration: 0.5 }
                     }
                   }
                 };
