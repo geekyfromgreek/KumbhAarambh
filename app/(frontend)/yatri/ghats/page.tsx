@@ -173,6 +173,7 @@ export default function GhatsMonitor() {
   const [reportGhatId, setReportGhatId] = useState("ghat-1");
   const [reportedDensity, setReportedDensity] = useState<"LOW" | "MODERATE" | "HIGH">("MODERATE");
   const [reportSuccess, setReportSuccess] = useState(false);
+  const [locationError, setLocationError] = useState<string | null>(null);
 
   const fetchGhats = async (uLat: number | null, uLng: number | null) => {
     const { data, error } = await supabase.from("ghats").select("*");
@@ -241,6 +242,21 @@ export default function GhatsMonitor() {
       return;
     }
 
+    const targetGhat = ghats.find(g => g.id === reportGhatId);
+    if (!targetGhat) return;
+
+    if (!userLocation) {
+      setLocationError("We need your location to verify you are at the ghat. Please enable GPS sharing.");
+      return;
+    }
+
+    const dist = getDistance(userLocation.lat, userLocation.lng, targetGhat.lat, targetGhat.lng);
+    if (dist > 2.0) {
+      setLocationError(`Verification failed: You are ${dist.toFixed(1)} km away. You must be within 2.0 km of ${targetGhat.name} to submit a report.`);
+      return;
+    }
+
+    setLocationError(null);
     const flag = reportedDensity === "HIGH" ? "RED" : reportedDensity === "MODERATE" ? "YELLOW" : "GREEN";
 
     const { error } = await supabase
@@ -365,6 +381,19 @@ export default function GhatsMonitor() {
           <p className="text-[11px] text-on-surface-variant leading-relaxed">
             Help fellow pilgrims stay safe. If you are currently at a bathing ghat, report the crowd levels to update the live safety dashboard.
           </p>
+
+          {locationError && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="p-3 bg-error-container/30 border border-error/25 rounded-xl flex gap-2.5 text-left mb-2"
+            >
+              <ShieldAlert size={18} className="text-error shrink-0 mt-0.5" />
+              <p className="text-[11px] text-error font-semibold leading-relaxed">
+                {locationError}
+              </p>
+            </motion.div>
+          )}
 
           {reportSuccess ? (
             <motion.div 
@@ -510,12 +539,23 @@ export default function GhatsMonitor() {
                   </p>
                 </div>
 
-                <button
-                  onClick={() => setSelectedGhat(null)}
-                  className="w-full py-3.5 rounded-xl bg-primary text-on-primary font-bold shadow-md hover:bg-primary-container transition-colors cursor-pointer text-center text-xs"
-                >
-                  Understood
-                </button>
+                <div className="flex gap-3">
+                  <a
+                    href={`https://www.google.com/maps/dir/?api=1&destination=${selectedGhat.lat},${selectedGhat.lng}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 py-3 rounded-xl border border-primary text-primary font-bold text-center text-xs hover:bg-primary/5 transition-all flex items-center justify-center gap-1.5"
+                  >
+                    <span className="material-symbols-outlined text-[16px]">navigation</span>
+                    Navigate
+                  </a>
+                  <button
+                    onClick={() => setSelectedGhat(null)}
+                    className="flex-1 py-3 rounded-xl bg-primary text-on-primary font-bold shadow-md hover:bg-primary-container transition-colors cursor-pointer text-center text-xs"
+                  >
+                    Close
+                  </button>
+                </div>
               </div>
             </motion.div>
           </>
