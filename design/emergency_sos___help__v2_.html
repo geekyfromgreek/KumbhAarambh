@@ -1,0 +1,262 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>KumbhAarambh - Emergency</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600&amp;family=Plus+Jakarta+Sans:wght@500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed-variant": "#5c4300",
+                        "surface-container-highest": "#e8e2d8",
+                        "secondary-fixed": "#ffdad6",
+                        "primary-fixed": "#ffdbce",
+                        "inverse-on-surface": "#f7f0e6",
+                        "on-secondary-container": "#731214",
+                        "on-surface-variant": "#5a4138",
+                        "on-primary-container": "#fffbff",
+                        "tertiary": "#765700",
+                        "surface-container-low": "#faf3e9",
+                        "on-secondary-fixed-variant": "#86211f",
+                        "on-tertiary-fixed": "#261a00",
+                        "on-primary-fixed": "#370e00",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-container": "#fffbff",
+                        "surface": "#fff8f0",
+                        "surface-container-high": "#eee7dd",
+                        "background": "#fff8f0",
+                        "on-primary": "#ffffff",
+                        "on-background": "#1e1b16",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed-dim": "#f6be39",
+                        "outline-variant": "#e2bfb2",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed": "#410003",
+                        "secondary": "#a63934",
+                        "secondary-container": "#ff7b72",
+                        "surface-bright": "#fff8f0",
+                        "tertiary-container": "#956e00",
+                        "on-primary-fixed-variant": "#802a00",
+                        "primary-container": "#cc4800",
+                        "primary-fixed-dim": "#ffb59a",
+                        "on-surface": "#1e1b16",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed-dim": "#ffb3ad",
+                        "surface-dim": "#e0d9d0",
+                        "inverse-primary": "#ffb59a",
+                        "surface-tint": "#a73a00",
+                        "primary": "#a33800",
+                        "error-container": "#ffdad6",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed": "#ffdfa0",
+                        "outline": "#8e7166",
+                        "surface-container": "#f4ede3",
+                        "inverse-surface": "#33302a",
+                        "surface-variant": "#e8e2d8",
+                        "on-error": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-md": "12px",
+                        "stack-lg": "24px",
+                        "margin-mobile": "20px",
+                        "base": "8px",
+                        "margin-desktop": "40px",
+                        "gutter": "16px",
+                        "stack-sm": "4px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "body-sm": ["beVietnamPro"],
+                        "display-lg-mobile": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "body-lg": ["beVietnamPro"],
+                        "label-md": ["beVietnamPro"],
+                        "title-lg": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "500"}],
+                        "body-sm": ["13px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "display-lg-mobile": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "display-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "body-lg": ["15px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "title-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill {
+            font-variation-settings: 'FILL' 1;
+        }
+        /* Custom Marigold Divider */
+        .marigold-divider {
+            position: relative;
+            text-align: center;
+            margin: 24px 0;
+        }
+        .marigold-divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            border-top: 1px solid rgba(166, 57, 52, 0.2); /* Secondary color with opacity */
+            z-index: 1;
+        }
+        .marigold-divider span {
+            position: relative;
+            z-index: 2;
+            background-color: #fff8f0; /* bg-surface */
+            padding: 0 16px;
+            color: #a63934; /* text-secondary */
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDxLk6DdRhSQ7LL4xeAGIj20IAiVsk85SxsVeFFgrGx3A3svH-Z57wfVwRFUH9bE3iuV0ZsMTMRq-V6DfI7fR3exXgh9AaMtdCIGL_dw6LOAazyex-HXkzZcNC1cAUir-uwA59ryP2Mt4dkwDJ0oU5kgdT9gh6itLvsaPuRrgq2KeVHIe5aTKwze3DG0rXV3z9II6H05a-X4SZsDhNvRm9__HKhXydo3-lK7Y2x_tCEa4un7HhmOVWf1lXCjSLpBoVViW9PI6Xi8-w');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.1;
+    z-index: -1;
+    pointer-events: none;
+  }
+</style></head>
+<body class="bg-surface text-on-surface font-body-lg antialiased selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile h-16 bg-surface border-b-8 border-tertiary shadow-sm">
+<div class="flex items-center gap-2 font-headline-md text-headline-md font-bold text-primary hover:bg-surface-container-high transition-colors p-2 rounded-lg cursor-pointer">
+<span class="material-symbols-outlined icon-fill">light_mode</span>
+</div>
+<div class="flex items-center gap-2 font-headline-md text-headline-md font-bold text-primary">
+<span>KumbhAarambh</span>
+</div>
+<div class="flex items-center gap-2 font-label-md text-label-md text-primary hover:bg-surface-container-high transition-colors p-2 rounded-lg cursor-pointer flex-col justify-center">
+<span class="material-symbols-outlined icon-fill text-error">notifications</span>
+<span class="text-error font-bold">SOS</span>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-[calc(64px+24px)] pb-[calc(80px+24px)] px-margin-mobile min-h-screen flex flex-col gap-stack-lg max-w-[600px] mx-auto">
+<!-- Header Section -->
+<section class="text-center">
+<h1 class="font-display-lg-mobile text-display-lg-mobile text-error mb-2">Emergency Help</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Tap a button below for immediate assistance. Your location will be shared automatically.</p>
+</section>
+<!-- Direct Action Buttons -->
+<section class="flex flex-col gap-stack-md">
+<button class="w-full h-[64px] bg-error hover:bg-on-error-container text-on-error rounded-xl shadow-[0_12px_24px_rgba(186,26,26,0.15)] flex items-center justify-between px-6 transition-transform active:scale-95 duration-150 relative overflow-hidden group">
+<div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity"></div>
+<div class="flex items-center gap-4 z-10">
+<span class="material-symbols-outlined icon-fill text-[32px]">local_police</span>
+<span class="font-title-lg text-title-lg font-bold tracking-wide">Police (100)</span>
+</div>
+<span class="material-symbols-outlined z-10">call</span>
+</button>
+<button class="w-full h-[64px] bg-error hover:bg-on-error-container text-on-error rounded-xl shadow-[0_12px_24px_rgba(186,26,26,0.15)] flex items-center justify-between px-6 transition-transform active:scale-95 duration-150 relative overflow-hidden group">
+<div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity"></div>
+<div class="flex items-center gap-4 z-10">
+<span class="material-symbols-outlined icon-fill text-[32px]">ambulance</span>
+<span class="font-title-lg text-title-lg font-bold tracking-wide">Ambulance (108)</span>
+</div>
+<span class="material-symbols-outlined z-10">call</span>
+</button>
+<button class="w-full h-[64px] bg-secondary hover:bg-on-secondary-container text-on-secondary rounded-xl shadow-[0_12px_24px_rgba(166,57,52,0.15)] flex items-center justify-between px-6 transition-transform active:scale-95 duration-150 relative overflow-hidden group">
+<div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity"></div>
+<div class="flex items-center gap-4 z-10">
+<span class="material-symbols-outlined icon-fill text-[32px]">support_agent</span>
+<span class="font-title-lg text-title-lg font-bold tracking-wide">Authority Helpline</span>
+</div>
+<span class="material-symbols-outlined z-10">call</span>
+</button>
+</section>
+<div class="marigold-divider">
+<span class="material-symbols-outlined text-[16px]">local_florist</span>
+</div>
+<!-- "I'm Lost" Section -->
+<section class="bg-error-container text-on-error-container rounded-xl p-6 shadow-[0_12px_24px_rgba(186,26,26,0.05)] border border-error/10 relative overflow-hidden">
+<!-- Decorative background element -->
+<div class="absolute -top-10 -right-10 opacity-10 pointer-events-none">
+<span class="material-symbols-outlined icon-fill text-[120px]">explore</span>
+</div>
+<div class="relative z-10">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-10 h-10 rounded-full bg-error text-on-error flex items-center justify-center">
+<span class="material-symbols-outlined icon-fill">wrong_location</span>
+</div>
+<h2 class="font-title-lg text-title-lg font-bold">I'm Lost</h2>
+</div>
+<p class="font-body-lg text-body-lg mb-6 opacity-90">Can't find your way? Share your location using nearby landmarks to get immediate guidance from volunteers.</p>
+<div class="bg-surface-lowest rounded-lg p-4 mb-6 border border-outline-variant/30 flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary mt-0.5">location_on</span>
+<div>
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-1">Estimated Near</p>
+<p class="font-title-lg text-title-lg text-on-surface font-semibold">Triveni Sangam Ghat</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Accuracy: ~15 meters</p>
+</div>
+</div>
+<button class="w-full h-12 bg-on-error-container text-error-container rounded-xl font-label-md text-label-md uppercase tracking-wider shadow-md hover:bg-error hover:text-on-error transition-colors flex items-center justify-center gap-2 active:scale-95 duration-150">
+<span class="material-symbols-outlined text-[20px]">share_location</span>
+                    Share Location &amp; Request Help
+                </button>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<button class="fixed bottom-24 right-6 z-[60] flex items-center gap-2 px-6 py-3 bg-tertiary-container text-on-tertiary-container rounded-full shadow-lg hover:shadow-xl hover:bg-tertiary transition-all active:scale-95 duration-200">
+<span class="material-symbols-outlined text-[24px]">smart_toy</span>
+<span class="font-label-md text-label-md font-bold uppercase tracking-wide">Ask Kumbh Guide</span>
+</button><nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 py-3 pb-safe bg-surface shadow-[0_-4px_12px_rgba(122,24,24,0.05)] rounded-t-xl">
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-primary transition-all font-label-md text-label-md group">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform duration-200">home</span>
+<span class="mt-1">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-primary transition-all font-label-md text-label-md group">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform duration-200">map</span>
+<span class="mt-1">Map</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-primary transition-all font-label-md text-label-md group">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform duration-200">payments</span>
+<span class="mt-1">Fares</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-primary transition-all font-label-md text-label-md group">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform duration-200">restaurant</span>
+<span class="mt-1">Food</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-tertiary-container text-on-tertiary-container rounded-full px-4 py-1 scale-90 transition-all font-label-md text-label-md">
+<span class="material-symbols-outlined icon-fill">emergency</span>
+<span class="mt-1 font-bold">SOS</span>
+</button>
+</nav>
+</body></html>

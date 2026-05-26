@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KumbhAarambh - Login</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed": "#261a00",
+                        "primary-fixed": "#ffdbce",
+                        "on-secondary-fixed-variant": "#86211f",
+                        "on-secondary": "#ffffff",
+                        "surface-container-highest": "#e8e2d8",
+                        "secondary": "#a63934",
+                        "on-tertiary-container": "#fffbff",
+                        "on-primary-fixed-variant": "#802a00",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-container": "#956e00",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface": "#1e1b16",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed-dim": "#f6be39",
+                        "on-secondary-container": "#731214",
+                        "surface-bright": "#fff8f0",
+                        "on-error": "#ffffff",
+                        "inverse-surface": "#33302a",
+                        "background": "#fff8f0",
+                        "primary": "#a33800",
+                        "on-error-container": "#93000a",
+                        "tertiary": "#765700",
+                        "surface-variant": "#e8e2d8",
+                        "primary-fixed-dim": "#ffb59a",
+                        "secondary-fixed-dim": "#ffb3ad",
+                        "on-tertiary-fixed-variant": "#5c4300",
+                        "on-background": "#1e1b16",
+                        "on-primary-container": "#fffbff",
+                        "on-primary-fixed": "#370e00",
+                        "inverse-on-surface": "#f7f0e6",
+                        "error": "#ba1a1a",
+                        "surface-tint": "#a73a00",
+                        "outline-variant": "#e2bfb2",
+                        "surface-dim": "#e0d9d0",
+                        "on-surface-variant": "#5a4138",
+                        "surface-container-low": "#faf3e9",
+                        "surface-container-high": "#eee7dd",
+                        "primary-container": "#cc4800",
+                        "secondary-container": "#ff7b72",
+                        "surface": "#fff8f0",
+                        "on-secondary-fixed": "#410003",
+                        "tertiary-fixed": "#ffdfa0",
+                        "surface-container": "#f4ede3",
+                        "secondary-fixed": "#ffdad6",
+                        "outline": "#8e7166",
+                        "inverse-primary": "#ffb59a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px",
+                        "2xl": "1rem"
+                    },
+                    "spacing": {
+                        "margin-mobile": "20px",
+                        "stack-lg": "24px",
+                        "stack-md": "12px",
+                        "margin-desktop": "40px",
+                        "stack-sm": "4px",
+                        "gutter": "16px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "display-lg-mobile": ["Plus Jakarta Sans"],
+                        "body-sm": ["Be Vietnam Pro"],
+                        "label-md": ["Be Vietnam Pro"],
+                        "body-lg": ["Be Vietnam Pro"],
+                        "title-lg": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "display-lg-mobile": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "body-sm": ["13px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-lg": ["15px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "title-lg": ["20px", { "lineHeight": "28px", "fontWeight": "500" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "500" }],
+                        "display-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Be Vietnam Pro', sans-serif;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .bg-diya-pattern {
+            background-image: url('https://lh3.googleusercontent.com/aida/ADBb0ujjceJ6p0TBU4OoUw2zGhITYBg19yILxyCGM1BI-1OzpkZY41BEkTy9WHgcJvcVEezivyQ4LaJQlTHToGfwDuj1QwAGrcYGvyvwQfG0UVBtLFY-b845ao1ft9Cw0yyINvF8BdYLuYukNyD7aja6Pks-HdiFIWoByfJTSMdmSKhxMh53xw4qH4vji2jF_dw5TcONUtHoxIWXFnaHJO2ZD2j-41IQc7Iczi2zuxnaS4fsTbbT3_MA_QVV0mM');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .marigold-divider {
+            height: 8px;
+            background-image: url('https://lh3.googleusercontent.com/aida/ADBb0uigG_XFb6yOKJoh5UFRpbGjkbHS5mecC07LThXbzd8mlSeSjnuKgAzJwwblKjbm3ldQjdhAjcMah9xfbJ_ahuaqcuOLuHXP_Zf2vUPigUoz_IFaeDO57hx_ATZ_IWLDAqw60RS_5YoteiY5M3FL-8wO79oQdsh6f9N4ZPOZWPpWciFMufWXMBIhIA_4AA7-ZnwqooW0piHHcbAf9wzYXL5oT4k0NxldmLw2X4vQ1lJ26K2qvkVLeAXQEzo');
+            background-size: contain;
+            background-repeat: repeat-x;
+            background-position: center;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col relative overflow-hidden">
+<!-- Background overlay for opacity -->
+<div class="absolute inset-0 bg-diya-pattern opacity-20 pointer-events-none z-0"></div>
+<main class="flex-1 flex flex-col items-center justify-center px-margin-mobile md:px-margin-desktop py-12 relative z-10 w-full max-w-md mx-auto">
+<!-- Header Section -->
+<div class="text-center mb-stack-lg w-full">
+<div class="flex items-center justify-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary text-4xl" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+<h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-primary tracking-tight">KumbhAarambh</h1>
+</div>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Welcome to your sacred journey companion.</p>
+</div>
+<!-- Marigold Divider -->
+<div aria-hidden="true" class="w-full marigold-divider mb-stack-lg opacity-80"></div>
+<!-- Login Card -->
+<div class="w-full bg-surface-container-lowest rounded-2xl shadow-[0_12px_24px_rgba(122,24,24,0.05)] border border-outline-variant/10 p-6 md:p-8 relative overflow-hidden backdrop-blur-sm bg-white/80">
+<form class="flex flex-col gap-stack-lg">
+<div class="flex flex-col gap-stack-sm">
+<label class="font-label-md text-label-md text-secondary" for="email">Phone Number or Email</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">person</span>
+<input class="w-full pl-10 pr-4 py-3 bg-surface-container-lowest border border-outline-variant rounded-md focus:ring-2 focus:ring-secondary focus:border-secondary transition-all font-body-lg text-body-lg text-on-surface" id="email" placeholder="Enter your details" type="text"/>
+</div>
+</div>
+<div class="flex flex-col gap-stack-sm">
+<label class="font-label-md text-label-md text-secondary" for="password">Password</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">lock</span>
+<input class="w-full pl-10 pr-4 py-3 bg-surface-container-lowest border border-outline-variant rounded-md focus:ring-2 focus:ring-secondary focus:border-secondary transition-all font-body-lg text-body-lg text-on-surface" id="password" placeholder="Enter your password" type="password"/>
+</div>
+<div class="flex justify-end mt-1">
+<a class="font-label-md text-label-md text-secondary hover:text-primary transition-colors" href="#">Forgot Password?</a>
+</div>
+</div>
+<div class="flex flex-col gap-4 mt-2">
+<button class="w-full bg-primary hover:bg-primary-container text-on-primary font-title-lg text-title-lg rounded-xl py-3 shadow-sm active:scale-95 transition-all flex justify-center items-center gap-2" type="button">
+<span>Login</span>
+</button>
+<div class="relative flex items-center py-2">
+<div class="flex-grow border-t border-outline-variant/30"></div>
+<span class="flex-shrink-0 mx-4 font-body-sm text-body-sm text-on-surface-variant">or</span>
+<div class="flex-grow border-t border-outline-variant/30"></div>
+</div>
+<button class="w-full bg-transparent border border-outline text-primary hover:bg-surface-variant font-title-lg text-title-lg rounded-xl py-3 active:scale-95 transition-all flex justify-center items-center gap-2" type="button">
+<span>Continue as Guest</span>
+</button>
+</div>
+</form>
+</div>
+<!-- Nashikkar Info -->
+<div class="mt-stack-lg w-full bg-surface-container-low rounded-xl p-4 border border-outline-variant/20 shadow-sm">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-tertiary mt-1" style="font-variation-settings: 'FILL' 1;">info</span>
+<div>
+<h3 class="font-title-lg text-title-lg text-tertiary mb-1">Nashikkars</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Log in to report fares, add local food spots, and share essential tips to help visiting Yatris.</p>
+</div>
+</div>
+</div>
+<!-- Sanskrit Quote -->
+<div class="mt-12 text-center">
+<p class="font-body-lg text-body-lg text-secondary italic opacity-80" style="font-family: 'Times New Roman', serif;">सत्यं शिवं सुन्दरम्</p>
+</div>
+</main>
+</body></html>

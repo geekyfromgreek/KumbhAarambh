@@ -1,0 +1,270 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Nashikkar Home</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700&amp;family=beVietnamPro:wght@400;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed-variant": "#5c4300",
+                        "surface-container-highest": "#e8e2d8",
+                        "secondary-fixed": "#ffdad6",
+                        "primary-fixed": "#ffdbce",
+                        "inverse-on-surface": "#f7f0e6",
+                        "on-secondary-container": "#731214",
+                        "on-surface-variant": "#5a4138",
+                        "on-primary-container": "#fffbff",
+                        "tertiary": "#765700",
+                        "surface-container-low": "#faf3e9",
+                        "on-secondary-fixed-variant": "#86211f",
+                        "on-tertiary-fixed": "#261a00",
+                        "on-primary-fixed": "#370e00",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-container": "#fffbff",
+                        "surface": "#fff8f0",
+                        "surface-container-high": "#eee7dd",
+                        "background": "#fff8f0",
+                        "on-primary": "#ffffff",
+                        "on-background": "#1e1b16",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed-dim": "#f6be39",
+                        "outline-variant": "#e2bfb2",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed": "#410003",
+                        "secondary": "#a63934",
+                        "secondary-container": "#ff7b72",
+                        "surface-bright": "#fff8f0",
+                        "tertiary-container": "#956e00",
+                        "on-primary-fixed-variant": "#802a00",
+                        "primary-container": "#cc4800",
+                        "primary-fixed-dim": "#ffb59a",
+                        "on-surface": "#1e1b16",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed-dim": "#ffb3ad",
+                        "surface-dim": "#e0d9d0",
+                        "inverse-primary": "#ffb59a",
+                        "surface-tint": "#a73a00",
+                        "primary": "#a33800",
+                        "error-container": "#ffdad6",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed": "#ffdfa0",
+                        "outline": "#8e7166",
+                        "surface-container": "#f4ede3",
+                        "inverse-surface": "#33302a",
+                        "surface-variant": "#e8e2d8",
+                        "on-error": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-md": "12px",
+                        "stack-lg": "24px",
+                        "margin-mobile": "20px",
+                        "base": "8px",
+                        "margin-desktop": "40px",
+                        "gutter": "16px",
+                        "stack-sm": "4px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "body-sm": ["beVietnamPro"],
+                        "display-lg-mobile": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "body-lg": ["beVietnamPro"],
+                        "label-md": ["beVietnamPro"],
+                        "title-lg": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "500"}],
+                        "body-sm": ["13px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "display-lg-mobile": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "display-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "body-lg": ["15px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "title-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #fff8f0; /* surface */
+        }
+        .marigold-divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: #a63934; /* secondary */
+        }
+        .marigold-divider::before,
+        .marigold-divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid #e2bfb2; /* outline-variant */
+        }
+        .marigold-divider:not(:empty)::before {
+            margin-right: .25em;
+        }
+        .marigold-divider:not(:empty)::after {
+            margin-left: .25em;
+        }
+        .ambient-shadow-sm {
+            box-shadow: 0 4px 12px rgba(122, 24, 24, 0.05);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="text-on-surface pb-[90px] pt-16" style="background-image: linear-gradient(rgba(255, 248, 240, 0.9), rgba(255, 248, 240, 0.9)), url('https://lh3.googleusercontent.com/aida-public/AB6AXuDm8drjn_qeWAvVGc5WnQihNr_lcHZW36O2WyWKIZJUVFI-kec_0vllWNFYx0I-6vg767Sin7kYUaU0QKe-cbk3HzlRfSPUP7RCWgPYQY4ufHzj0vNT7FHdo0AKMoPaPTuWwZeLxUiJ9e4_-oSvYNKyEfiOGGrtDzenA5sV-B8aNflpbUNvqWjAIyGFcf7CEi3SRHYGe7xWVaulddPW7lv-nv3FLBFOl7-xnNgUC2Q01BDw4UuqldE__U6mnTQy0OUtWTlD6mT6ov4'); background-attachment: fixed; background-size: cover; background-position: center;">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile h-16 bg-surface border-b-8 border-tertiary shadow-sm">
+<div class="flex items-center gap-2 font-headline-md text-headline-md font-bold text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">light_mode</span>
+<span>KumbhAarambh</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="flex items-center gap-1 bg-tertiary-container/15 text-on-surface-variant px-3 py-1 rounded-full text-label-md font-label-md border border-tertiary/20">
+<span class="material-symbols-outlined text-[16px] text-tertiary-fixed-dim" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-bold">142 pts</span>
+</div>
+<button class="text-primary hover:bg-surface-container-high transition-colors p-2 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined">notifications</span>
+<span class="sr-only">SOS</span>
+</button>
+</div>
+</header>
+<main class="px-margin-mobile max-w-[1200px] mx-auto space-y-stack-lg pt-stack-md">
+<!-- Welcome Section -->
+<section class="mt-stack-md">
+<h1 class="font-title-lg text-title-lg text-on-surface mb-1">Namaste, Nashikkar</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Your local knowledge guides thousands.</p>
+</section>
+<!-- Stats Row -->
+<section class="grid grid-cols-3 gap-3">
+<div class="bg-surface-container-lowest rounded-xl p-4 flex flex-col items-center justify-center ambient-shadow-sm border border-outline-variant/20">
+<span class="material-symbols-outlined text-primary mb-2 text-2xl" style="font-variation-settings: 'FILL' 1;">lightbulb</span>
+<span class="font-headline-md text-headline-md font-bold text-on-surface">42</span>
+<span class="font-label-md text-label-md text-on-surface-variant text-center mt-1">Tips Added</span>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-4 flex flex-col items-center justify-center ambient-shadow-sm border border-outline-variant/20">
+<span class="material-symbols-outlined text-primary mb-2 text-2xl" style="font-variation-settings: 'FILL' 1;">payments</span>
+<span class="font-headline-md text-headline-md font-bold text-on-surface">18</span>
+<span class="font-label-md text-label-md text-on-surface-variant text-center mt-1">Fares Reported</span>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-4 flex flex-col items-center justify-center ambient-shadow-sm border border-outline-variant/20">
+<span class="material-symbols-outlined text-primary mb-2 text-2xl" style="font-variation-settings: 'FILL' 1;">group</span>
+<span class="font-headline-md text-headline-md font-bold text-on-surface">850</span>
+<span class="font-label-md text-label-md text-on-surface-variant text-center mt-1">People Helped</span>
+</div>
+</section>
+<!-- Hot Topics -->
+<section>
+<h2 class="font-title-lg text-title-lg text-on-surface mb-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">local_fire_department</span> Hot Topics
+            </h2>
+<div class="flex flex-wrap gap-2">
+<button class="bg-tertiary-fixed-dim/15 text-secondary px-4 py-2 rounded-full font-label-md text-label-md border border-tertiary-fixed-dim/30">Auto Fares from Station</button>
+<button class="bg-tertiary-fixed-dim/15 text-secondary px-4 py-2 rounded-full font-label-md text-label-md border border-tertiary-fixed-dim/30">Best Thali near Ramkund</button>
+<button class="bg-tertiary-fixed-dim/15 text-secondary px-4 py-2 rounded-full font-label-md text-label-md border border-tertiary-fixed-dim/30">Aarti Timings</button>
+<button class="bg-tertiary-fixed-dim/15 text-secondary px-4 py-2 rounded-full font-label-md text-label-md border border-tertiary-fixed-dim/30">Locker Facilities</button>
+</div>
+</section>
+<div class="marigold-divider py-4">
+<span class="material-symbols-outlined text-xs">local_florist</span>
+</div>
+<!-- My Contributions Feed -->
+<section>
+<h2 class="font-title-lg text-title-lg text-on-surface mb-stack-md">My Contributions</h2>
+<div class="space-y-stack-md">
+<!-- Contribution Item 1 -->
+<div class="bg-surface-container-lowest rounded-xl p-4 ambient-shadow-sm border border-outline-variant/20">
+<div class="flex justify-between items-start mb-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary bg-primary-container/10 p-1.5 rounded-full text-sm">restaurant</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Food Recommendation</span>
+</div>
+<span class="font-body-sm text-body-sm text-outline">2h ago</span>
+</div>
+<h3 class="font-title-lg text-[16px] leading-tight text-on-surface mb-2">Authentic Misal at Sadhana</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-3 line-clamp-2">Best time to visit is before 9 AM to avoid the massive rush. Auto from CBS should be around ₹80.</p>
+<div class="flex items-center gap-4 border-t border-outline-variant/20 pt-3">
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">visibility</span>
+<span class="font-label-md text-label-md">1.2k views</span>
+</div>
+<div class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">thumb_up</span>
+<span class="font-label-md text-label-md">84 upvotes</span>
+</div>
+</div>
+</div>
+<!-- Contribution Item 2 -->
+<div class="bg-surface-container-lowest rounded-xl p-4 ambient-shadow-sm border border-outline-variant/20">
+<div class="flex justify-between items-start mb-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary bg-primary-container/10 p-1.5 rounded-full text-sm">payments</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Fare Alert</span>
+</div>
+<span class="font-body-sm text-body-sm text-outline">Yesterday</span>
+</div>
+<h3 class="font-title-lg text-[16px] leading-tight text-on-surface mb-2">Nashik Road to Tapovan</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-3">Shared auto is strictly ₹30 per seat. Do not pay ₹50 even if they insist it's festival rates.</p>
+<div class="flex items-center gap-4 border-t border-outline-variant/20 pt-3">
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">visibility</span>
+<span class="font-label-md text-label-md">3.4k views</span>
+</div>
+<div class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">thumb_up</span>
+<span class="font-label-md text-label-md">215 upvotes</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- FAB -->
+<button class="fixed bottom-24 right-6 z-50 bg-primary text-on-primary rounded-full px-6 py-4 flex items-center gap-2 shadow-lg hover:bg-primary/90 transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add</span>
+<span class="font-label-md text-label-md font-bold">Add Tip / Fare / Food</span>
+</button><button class="fixed bottom-[160px] right-6 z-50 bg-secondary text-on-secondary rounded-full px-6 py-4 flex items-center gap-2 shadow-lg hover:bg-secondary/90 transition-colors"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">smart_toy</span><span class="font-label-md text-label-md font-bold">Ask Kumbh Guide</span></button>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 py-3 pb-safe bg-surface shadow-[0_-4px_12px_rgba(122,24,24,0.05)] rounded-t-xl md:hidden">
+<!-- Active Item -->
+<a class="flex flex-col items-center justify-center bg-tertiary-container text-on-tertiary-container rounded-full px-4 py-1 scale-90 duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-label-md text-label-md">Home</span>
+</a>
+<!-- Inactive Items -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined">add_circle</span>
+<span class="font-label-md text-label-md">Add</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined">forum</span>
+<span class="font-label-md text-label-md">Community</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined">leaderboard</span>
+<span class="font-label-md text-label-md">Leaders</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md text-label-md">Profile</span>
+</a>
+</nav>
+</body></html>

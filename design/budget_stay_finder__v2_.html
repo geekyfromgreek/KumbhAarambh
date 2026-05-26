@@ -1,0 +1,340 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Budget Stay Finder - KumbhAarambh</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700&amp;family=beVietnamPro:wght@400;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-container": "#956e00",
+                        "background": "#fff8f0",
+                        "surface-dim": "#e0d9d0",
+                        "on-secondary-fixed": "#410003",
+                        "secondary-fixed-dim": "#ffb3ad",
+                        "secondary": "#a63934",
+                        "on-secondary-fixed-variant": "#86211f",
+                        "error": "#ba1a1a",
+                        "outline": "#8e7166",
+                        "on-primary-fixed-variant": "#802a00",
+                        "on-surface": "#1e1b16",
+                        "primary-fixed-dim": "#ffb59a",
+                        "on-surface-variant": "#5a4138",
+                        "tertiary-fixed": "#ffdfa0",
+                        "on-error-container": "#93000a",
+                        "surface-container-highest": "#e8e2d8",
+                        "primary": "#a33800",
+                        "on-primary": "#ffffff",
+                        "surface-bright": "#fff8f0",
+                        "secondary-fixed": "#ffdad6",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed": "#370e00",
+                        "inverse-on-surface": "#f7f0e6",
+                        "tertiary-fixed-dim": "#f6be39",
+                        "surface-container-high": "#eee7dd",
+                        "inverse-primary": "#ffb59a",
+                        "surface": "#fff8f0",
+                        "surface-variant": "#e8e2d8",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-container": "#fffbff",
+                        "surface-tint": "#a73a00",
+                        "primary-fixed": "#ffdbce",
+                        "on-tertiary-fixed-variant": "#5c4300",
+                        "secondary-container": "#ff7b72",
+                        "on-tertiary-container": "#fffbff",
+                        "on-secondary-container": "#731214",
+                        "tertiary": "#765700",
+                        "primary-container": "#cc4800",
+                        "on-error": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "surface-container-low": "#faf3e9",
+                        "surface-container": "#f4ede3",
+                        "on-tertiary-fixed": "#261a00",
+                        "on-background": "#1e1b16",
+                        "inverse-surface": "#33302a",
+                        "outline-variant": "#e2bfb2",
+                        "on-secondary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "8px",
+                        "stack-md": "12px",
+                        "stack-lg": "24px",
+                        "stack-sm": "4px",
+                        "margin-mobile": "20px",
+                        "margin-desktop": "40px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "title-lg": ["Plus Jakarta Sans", "sans-serif"],
+                        "label-md": ["beVietnamPro", "sans-serif"],
+                        "display-lg": ["Plus Jakarta Sans", "sans-serif"],
+                        "display-lg-mobile": ["Plus Jakarta Sans", "sans-serif"],
+                        "headline-md": ["Plus Jakarta Sans", "sans-serif"],
+                        "body-lg": ["beVietnamPro", "sans-serif"],
+                        "body-sm": ["beVietnamPro", "sans-serif"]
+                    },
+                    "fontSize": {
+                        "title-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "display-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "display-lg-mobile": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "500"}],
+                        "body-lg": ["15px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-sm": ["13px", {"lineHeight": "20px", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .marigold-divider {
+            position: relative;
+            height: 1px;
+            background-color: #ffb59a; /* primary-fixed-dim approx */
+            margin: 24px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.3;
+        }
+        .marigold-divider::after {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background-color: #a33800; /* primary */
+            border-radius: 50%;
+            position: absolute;
+        }
+        
+        /* Subtle ambient shadow for sacred theme */
+        .ambient-shadow {
+            box-shadow: 0 4px 12px rgba(122, 24, 24, 0.05);
+        }
+        
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-lg antialiased pb-24"><div class="fixed inset-0 z-[-1] pointer-events-none opacity-10">
+<img alt="Godavari Ghats Background" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_Ai3yBgrGqSdu25MlGpOIN-6jzQgd7oxN7vdG_arXEUMql509DBewSllCCiUenAvpbxk43HQnq0CzX3uRVykaM86ryDr0srIexFxOhQzfKOcUPyLVT9cu7UEiXzUphJK_I75-GI25tFxM1F4vwZ3kmzquR1HkZ05Y43yTYs2Ae6aBRt7Ya2HuqTkfhsOLL6J7oplE4hop7RSseBSsYZGTCFdGRHM-QWAWOafSkeX6M-y3oX9wQgFUJu2DRL9Hopp4sFLsUlEvvGM">
+</div>
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile h-16 bg-surface border-b-8 border-tertiary shadow-sm">
+<button aria-label="Menu" class="text-on-surface-variant flex items-center justify-center">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">light_mode</span>
+</button>
+<div class="flex items-center gap-2 font-headline-md text-headline-md font-bold text-primary">
+            KumbhAarambh
+        </div>
+<button aria-label="SOS" class="text-on-surface-variant flex items-center justify-center gap-1">
+<span class="font-label-md text-label-md">SOS</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">notifications</span>
+</button>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-16 px-margin-mobile md:px-margin-desktop max-w-[1200px] mx-auto min-h-screen flex flex-col gap-stack-lg">
+<!-- Header Section -->
+<section class="mt-stack-lg">
+<h1 class="font-display-lg-mobile text-display-lg-mobile md:font-display-lg md:text-display-lg text-primary mb-stack-sm">Affordable Stays</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Verified pilgrim-friendly accommodation.</p>
+</section>
+<!-- Hero Search Section -->
+<section class="relative rounded-xl overflow-hidden ambient-shadow h-64 md:h-80 flex items-center justify-center px-4">
+<img alt="Kalaram Temple" class="absolute inset-0 w-full h-full object-cover z-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXSU4HSmrBuh6qWKnfqUpnoYhntL4WvLmwAuiKmXRxyZnZ_YuVnunAYPXy4rey03_IUKdv12iQQtU5E-8_HS59oMEY9BQAKyIsj376YK6lj3-mGEZVHf_jqFvHYSzbxNpCxwDcEcXgSTA3ypW6kXvSnjeJ9rjmo8rQVDnLeo7ad4LboIS8lq_pMKC5BXFNZ_oh1SQnuRR6u4xdNAm40NlX-OeJ2blMTEQaoOCwfwWsZh4SGlZFDYxmBeQ1O43eBnED4Ewy3JrzZi8">
+<div class="absolute inset-0 bg-surface/80 backdrop-blur-sm z-10"></div>
+<div class="relative z-20 w-full max-w-2xl bg-surface-container-lowest p-stack-md rounded-xl ambient-shadow border border-outline-variant/30 flex flex-col gap-stack-md">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-stack-md">
+<!-- Location -->
+<div class="flex flex-col gap-stack-sm">
+<label class="font-label-md text-label-md text-secondary">Location</label>
+<div class="flex items-center gap-2 border border-outline-variant rounded-md px-3 py-2 focus-within:border-secondary focus-within:ring-1 focus-within:ring-secondary transition-colors bg-surface-container-lowest">
+<span class="material-symbols-outlined text-primary text-[20px]">location_on</span>
+<input class="bg-transparent border-none outline-none w-full font-body-lg text-body-lg text-on-surface placeholder-on-surface-variant/50 focus:ring-0 p-0" placeholder="e.g., Ramkund" type="text">
+</div>
+</div>
+<!-- Dates -->
+<div class="flex flex-col gap-stack-sm">
+<label class="font-label-md text-label-md text-secondary">Dates</label>
+<div class="flex items-center gap-2 border border-outline-variant rounded-md px-3 py-2 focus-within:border-secondary focus-within:ring-1 focus-within:ring-secondary transition-colors bg-surface-container-lowest">
+<span class="material-symbols-outlined text-primary text-[20px]">calendar_today</span>
+<input class="bg-transparent border-none outline-none w-full font-body-lg text-body-lg text-on-surface placeholder-on-surface-variant/50 focus:ring-0 p-0" placeholder="Select dates" type="text">
+</div>
+</div>
+<!-- Yatris -->
+<div class="flex flex-col gap-stack-sm">
+<label class="font-label-md text-label-md text-secondary">Yatris</label>
+<div class="flex items-center gap-2 border border-outline-variant rounded-md px-3 py-2 focus-within:border-secondary focus-within:ring-1 focus-within:ring-secondary transition-colors bg-surface-container-lowest">
+<span class="material-symbols-outlined text-primary text-[20px]">group</span>
+<input class="bg-transparent border-none outline-none w-full font-body-lg text-body-lg text-on-surface placeholder-on-surface-variant/50 focus:ring-0 p-0" placeholder="2 Adults" type="number">
+</div>
+</div>
+</div>
+<button class="w-full bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md py-3 rounded-xl transition-colors flex justify-center items-center gap-2 shadow-sm">
+<span class="material-symbols-outlined text-[20px]">search</span>
+                    Search Stays
+                </button>
+</div>
+</section>
+<!-- Filter Chips -->
+<section class="flex gap-2 overflow-x-auto no-scrollbar py-2 -mx-margin-mobile px-margin-mobile md:mx-0 md:px-0">
+<button class="whitespace-nowrap px-4 py-2 rounded-full font-label-md text-label-md bg-tertiary-fixed-dim/20 text-secondary border border-tertiary-fixed-dim/30 hover:bg-tertiary-fixed-dim/30 transition-colors">All</button>
+<button class="whitespace-nowrap px-4 py-2 rounded-full font-label-md text-label-md bg-tertiary-fixed-dim/15 text-secondary border border-transparent hover:bg-tertiary-fixed-dim/30 transition-colors">Ashram</button>
+<button class="whitespace-nowrap px-4 py-2 rounded-full font-label-md text-label-md bg-tertiary-fixed-dim/15 text-secondary border border-transparent hover:bg-tertiary-fixed-dim/30 transition-colors">Dharamshala</button>
+<button class="whitespace-nowrap px-4 py-2 rounded-full font-label-md text-label-md bg-tertiary-fixed-dim/15 text-secondary border border-transparent hover:bg-tertiary-fixed-dim/30 transition-colors">Budget Hotel</button>
+<button class="whitespace-nowrap px-4 py-2 rounded-full font-label-md text-label-md bg-tertiary-fixed-dim/15 text-secondary border border-transparent hover:bg-tertiary-fixed-dim/30 transition-colors">Homestay</button>
+</section>
+<div class="marigold-divider"></div>
+<!-- Stay Cards Grid -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Card 1 -->
+<article class="bg-surface-container-lowest rounded-xl overflow-hidden ambient-shadow border border-outline-variant/10 flex flex-col hover:shadow-md transition-shadow group cursor-pointer">
+<div class="relative h-48 bg-surface-container-high">
+<img alt="Shanti Ashram Room" class="w-full h-full object-cover" data-alt="A simple, clean room in a spiritual ashram setting, with warm natural light streaming through a window onto basic beds. The room is painted in soft ivory tones, evoking a sense of calm and humility. There is a small shrine visible in the background, reinforcing the sacred, traditional Kumbh Mela atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1wv8NXAzS2yCRLjQesQLAgYGcY1cGcGBoED35DPiscGH4BPBF7WYxmAXtCu55IjyZZYa4XJ9LjsZUmS66GRiE3GWfc7cEFTD7HgdUKxv14ilEm5KDxIQ4RF0o-sbx4PnHAhor228ZFVYd4su0pumSIb0VSYmpvPgkxt3mqIGIc_VV32onM7oDc3lIan1_82ICDtc_ds_y3nm4xABbTAnf8g12RU2nuwdWCQso4flosWMpRt0VW_Kw7OYHrcSDYkFD5-JDFMOSx2U">
+<div class="absolute top-2 right-2 bg-surface-container-lowest/90 backdrop-blur text-primary font-label-md text-label-md px-2 py-1 rounded-md flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+                        Verified
+                    </div>
+</div>
+<div class="p-stack-md flex flex-col gap-stack-sm flex-grow">
+<div class="flex justify-between items-start">
+<h3 class="font-title-lg text-title-lg text-on-surface group-hover:text-primary transition-colors">Shanti Ashram</h3>
+<div class="text-right">
+<span class="block font-title-lg text-title-lg text-primary">₹300</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">/night</span>
+</div>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant font-body-sm text-body-sm mt-1">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+<span>0.5 km from Ramkund</span>
+</div>
+<div class="mt-auto pt-stack-sm flex flex-wrap gap-2">
+<span class="bg-surface-container inline-flex items-center gap-1 px-2 py-1 rounded font-body-sm text-[11px] text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">meeting_room</span> Shared Hall
+                        </span>
+<span class="bg-surface-container inline-flex items-center gap-1 px-2 py-1 rounded font-body-sm text-[11px] text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">water_drop</span> Hot Water
+                        </span>
+</div>
+</div>
+</article>
+<!-- Card 2 -->
+<article class="bg-surface-container-lowest rounded-xl overflow-hidden ambient-shadow border border-outline-variant/10 flex flex-col hover:shadow-md transition-shadow group cursor-pointer">
+<div class="relative h-48 bg-surface-container-high">
+<img alt="Ganga Dharamshala Entrance" class="w-full h-full object-cover" data-alt="A modest, welcoming entrance to a traditional Indian Dharamshala, built with warm terracotta bricks and painted with subtle saffron accents. The courtyard is clean and illuminated by gentle morning sunlight, offering a peaceful sanctuary for pilgrims. Small marigold garlands decorate the doorway." src="https://lh3.googleusercontent.com/aida-public/AB6AXuATEvhNG_knNqFLdIG0NKO06jb0QlsQLuMMpy2J0cVlNtc5jgD8dVjgNkn63jUfxFlLH1-fOOURVR1dmIkw6yN4P7Y5PyKzNOLlAzMFYuxlx2_TzZ-4eH7dOOj9dd5Uj3biPEjopYomZIDG2aZqKci2S55AxfYbXhqwVIPSAwN3l8-GG18NJp1sB3K_TSyWWvPZRwMaE2xS7ut7mN1gfxWjRB1auWx9dOCnjlD3JHwkkBkI2U3gitVO1rD5cdvPSHTK-Dd4doyM9Lc">
+<div class="absolute top-2 right-2 bg-surface-container-lowest/90 backdrop-blur text-primary font-label-md text-label-md px-2 py-1 rounded-md flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+                        Verified
+                    </div>
+</div>
+<div class="p-stack-md flex flex-col gap-stack-sm flex-grow">
+<div class="flex justify-between items-start">
+<h3 class="font-title-lg text-title-lg text-on-surface group-hover:text-primary transition-colors">Ganga Dharamshala</h3>
+<div class="text-right">
+<span class="block font-title-lg text-title-lg text-primary">₹500</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">/night</span>
+</div>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant font-body-sm text-body-sm mt-1">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+<span>1.2 km from Ramkund</span>
+</div>
+<div class="mt-auto pt-stack-sm flex flex-wrap gap-2">
+<span class="bg-surface-container inline-flex items-center gap-1 px-2 py-1 rounded font-body-sm text-[11px] text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">restaurant</span> Meals Included
+                        </span>
+<span class="bg-surface-container inline-flex items-center gap-1 px-2 py-1 rounded font-body-sm text-[11px] text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">directions_bus</span> Near Bus Stand
+                        </span>
+</div>
+</div>
+</article>
+<!-- Card 3 -->
+<article class="bg-surface-container-lowest rounded-xl overflow-hidden ambient-shadow border border-outline-variant/10 flex flex-col hover:shadow-md transition-shadow group cursor-pointer">
+<div class="relative h-48 bg-surface-container-high">
+<img alt="Om Budget Stay Room" class="w-full h-full object-cover" data-alt="A clean, budget-friendly hotel room with a neatly made bed featuring crisp white linens. The room has soft, warm ambient lighting that creates a cozy, inviting atmosphere for travelers. A small window lets in natural light, revealing a glimpse of a spiritual cityscape in the background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgKsYYEuiTVBb67p_roLz07rwO3rhz03e4cI0_9kK9Vs6jeaTX0I5K6yVVHtl5AtqNb1B_U5UdfHu4zMVARyADEwCEwzk1hSKq1KG9Jjea27FoNnY4kJasaclRGPsJRnKUutdavdtJ9v9KN8HP0rRIlNWGp-agkFniesAeggMb3li1ylqqMLs72DRLq16dqBhMNwHqc5Av-3Y6FAmKsauPmxYN1gk5ArAof2UKJFdi1So1ef-tfINowG_d1_38AR-DlgqrZIrkRXw">
+</div>
+<div class="p-stack-md flex flex-col gap-stack-sm flex-grow">
+<div class="flex justify-between items-start">
+<h3 class="font-title-lg text-title-lg text-on-surface group-hover:text-primary transition-colors">Om Budget Stay</h3>
+<div class="text-right">
+<span class="block font-title-lg text-title-lg text-primary">₹800</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">/night</span>
+</div>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant font-body-sm text-body-sm mt-1">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+<span>2.0 km from Ramkund</span>
+</div>
+<div class="mt-auto pt-stack-sm flex flex-wrap gap-2">
+<span class="bg-surface-container inline-flex items-center gap-1 px-2 py-1 rounded font-body-sm text-[11px] text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">bed</span> Private Room
+                        </span>
+<span class="bg-surface-container inline-flex items-center gap-1 px-2 py-1 rounded font-body-sm text-[11px] text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">wifi</span> Free WiFi
+                        </span>
+</div>
+</div>
+</article>
+</section>
+</main>
+<!-- FAB: Ask AI -->
+<button class="fixed bottom-24 right-4 md:right-8 bg-tertiary-fixed-dim hover:bg-tertiary-fixed text-on-tertiary-fixed font-label-md text-label-md px-4 py-3 rounded-xl shadow-lg transition-transform hover:scale-105 flex items-center gap-2 z-40">
+<span class="material-symbols-outlined">smart_toy</span>
+        Kumbh Guide
+    </button>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 py-3 pb-safe bg-surface shadow-[0_-4px_12px_rgba(122,24,24,0.05)] rounded-t-xl md:hidden">
+<a class="flex flex-col items-center justify-center bg-tertiary-container text-on-tertiary-container rounded-full px-4 py-1 hover:text-primary transition-all scale-90 duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-label-md text-label-md mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined">map</span>
+<span class="font-label-md text-label-md mt-1">Map</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-label-md text-label-md mt-1">Fares</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined">restaurant</span>
+<span class="font-label-md text-label-md mt-1">Food</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined">emergency</span>
+<span class="font-label-md text-label-md mt-1">SOS</span>
+</a>
+</nav>
+<script>
+        // Simple script to handle bottom nav active state visual swap if needed for interactivity demo
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                // Reset all
+                document.querySelectorAll('nav a').forEach(a => {
+                    a.className = "flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-primary transition-all";
+                    a.querySelector('span.material-symbols-outlined').style.fontVariationSettings = "'FILL' 0";
+                });
+                // Set active
+                this.className = "flex flex-col items-center justify-center bg-tertiary-container text-on-tertiary-container rounded-full px-4 py-1 hover:text-primary transition-all scale-90 duration-200 ease-in-out";
+                this.querySelector('span.material-symbols-outlined').style.fontVariationSettings = "'FILL' 1";
+            });
+        });
+    </script>
+</body></html>

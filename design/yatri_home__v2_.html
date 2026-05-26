@@ -1,0 +1,316 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Yatri Home - KumbhAarambh</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-fixed-variant": "#5c4300",
+                    "surface-container-highest": "#e8e2d8",
+                    "secondary-fixed": "#ffdad6",
+                    "primary-fixed": "#ffdbce",
+                    "inverse-on-surface": "#f7f0e6",
+                    "on-secondary-container": "#731214",
+                    "on-surface-variant": "#5a4138",
+                    "on-primary-container": "#fffbff",
+                    "tertiary": "#765700",
+                    "surface-container-low": "#faf3e9",
+                    "on-secondary-fixed-variant": "#86211f",
+                    "on-tertiary-fixed": "#261a00",
+                    "on-primary-fixed": "#370e00",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary-container": "#fffbff",
+                    "surface": "#fff8f0",
+                    "surface-container-high": "#eee7dd",
+                    "background": "#fff8f0",
+                    "on-primary": "#ffffff",
+                    "on-background": "#1e1b16",
+                    "on-tertiary": "#ffffff",
+                    "tertiary-fixed-dim": "#f6be39",
+                    "outline-variant": "#e2bfb2",
+                    "on-error-container": "#93000a",
+                    "on-secondary-fixed": "#410003",
+                    "secondary": "#a63934",
+                    "secondary-container": "#ff7b72",
+                    "surface-bright": "#fff8f0",
+                    "tertiary-container": "#956e00",
+                    "on-primary-fixed-variant": "#802a00",
+                    "primary-container": "#cc4800",
+                    "primary-fixed-dim": "#ffb59a",
+                    "on-surface": "#1e1b16",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-fixed-dim": "#ffb3ad",
+                    "surface-dim": "#e0d9d0",
+                    "inverse-primary": "#ffb59a",
+                    "surface-tint": "#a73a00",
+                    "primary": "#a33800",
+                    "error-container": "#ffdad6",
+                    "error": "#ba1a1a",
+                    "tertiary-fixed": "#ffdfa0",
+                    "outline": "#8e7166",
+                    "surface-container": "#f4ede3",
+                    "inverse-surface": "#33302a",
+                    "surface-variant": "#e8e2d8",
+                    "on-error": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-md": "12px",
+                    "stack-lg": "24px",
+                    "margin-mobile": "20px",
+                    "base": "8px",
+                    "margin-desktop": "40px",
+                    "gutter": "16px",
+                    "stack-sm": "4px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "body-sm": ["Be Vietnam Pro"],
+                    "display-lg-mobile": ["Plus Jakarta Sans"],
+                    "display-lg": ["Plus Jakarta Sans"],
+                    "body-lg": ["Be Vietnam Pro"],
+                    "label-md": ["Be Vietnam Pro"],
+                    "title-lg": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "500"}],
+                    "body-sm": ["13px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "display-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "body-lg": ["15px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "title-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .marigold-divider {
+            height: 4px;
+            background-image: repeating-linear-gradient(90deg, #f6be39 0px, #f6be39 8px, transparent 8px, transparent 16px);
+            opacity: 0.8;
+        }
+        .sacred-shadow {
+            box-shadow: 0 4px 12px rgba(122, 24, 24, 0.05);
+        }
+        .pulse-green {
+            animation: pulse-green 2s infinite;
+        }
+        @keyframes pulse-green {
+            0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); }
+            70% { box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+        }
+        /* Hide scrollbar for horizontal scroll areas */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-sm pb-[80px] pt-[72px]">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile h-16 bg-surface border-b-8 border-tertiary shadow-sm">
+<div class="flex items-center gap-2 font-headline-md text-headline-md font-bold text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">light_mode</span>
+<span>KumbhAarambh</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:bg-surface-container-high transition-colors p-2 rounded-full">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="bg-error text-on-error font-label-md text-label-md px-4 py-2 rounded-full flex items-center gap-1 hover:opacity-90 transition-opacity">
+<span>SOS</span>
+</button>
+</div>
+</header>
+<!-- Sub-nav Marigold Strip -->
+<div class="marigold-divider w-full fixed top-16 z-40"></div>
+<main class="flex-grow px-margin-mobile py-stack-lg max-w-[1200px] mx-auto w-full md:grid md:grid-cols-12 md:gap-gutter">
+<div class="md:col-span-12 space-y-stack-lg">
+<!-- Hero Card -->
+<section class="relative bg-surface-container-low rounded-xl sacred-shadow border border-outline-variant/30 p-6 overflow-hidden">
+<div class="absolute inset-0 z-0 pointer-events-none">
+<img alt="Ramkund Ghat" class="w-full h-full object-cover opacity-[0.05]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxLk6DdRhSQ7LL4xeAGIj20IAiVsk85SxsVeFFgrGx3A3svH-Z57wfVwRFUH9bE3iuV0ZsMTMRq-V6DfI7fR3exXgh9AaMtdCIGL_dw6LOAazyex-HXkzZcNC1cAUir-uwA59ryP2Mt4dkwDJ0oU5kgdT9gh6itLvsaPuRrgq2KeVHIe5aTKwze3DG0rXV3z9II6H05a-X4SZsDhNvRm9__HKhXydo3-lK7Y2x_tCEa4un7HhmOVWf1lXCjSLpBoVViW9PI6Xi8-w">
+<div class="absolute inset-0 bg-surface/70 backdrop-blur-[2px]"></div>
+</div>
+<div class="relative z-10 flex flex-col md:flex-row md:justify-between md:items-end gap-stack-md">
+<div>
+<p class="font-label-md text-label-md text-on-surface-variant mb-1">THURSDAY, 15 FEB</p>
+<h1 class="font-display-lg-mobile md:font-display-lg text-primary">Namaste, Yatri 🙏</h1>
+<p class="font-body-lg text-on-surface mt-2 max-w-md">Welcome to the sacred city. May your journey be peaceful and blessed.</p>
+</div>
+<div class="inline-flex items-center gap-2 bg-surface rounded-full px-4 py-2 border border-outline-variant/50 self-start md:self-auto">
+<div class="w-3 h-3 rounded-full bg-green-500 pulse-green"></div>
+<span class="font-label-md text-label-md text-on-surface">Low Crowd Today</span>
+</div>
+</div>
+</section>
+<!-- Quick Action Grid -->
+<section>
+<h2 class="font-title-lg text-title-lg text-on-surface mb-stack-md">Essential Services</h2>
+<div class="grid grid-cols-2 md:grid-cols-3 gap-stack-md">
+<!-- Action Cards -->
+<button class="bg-surface-container-lowest rounded-xl p-4 sacred-shadow border border-outline-variant/20 flex flex-col items-center justify-center gap-2 hover:bg-surface-container-low transition-colors group">
+<div class="w-12 h-12 rounded-full bg-primary-container/20 text-primary flex items-center justify-center group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">water</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface text-center">Safe Ghats Today</span>
+</button>
+<button class="bg-surface-container-lowest rounded-xl p-4 sacred-shadow border border-outline-variant/20 flex flex-col items-center justify-center gap-2 hover:bg-surface-container-low transition-colors group">
+<div class="w-12 h-12 rounded-full bg-tertiary-container/20 text-tertiary flex items-center justify-center group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">local_taxi</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface text-center">Real Fares</span>
+</button>
+<button class="bg-surface-container-lowest rounded-xl p-4 sacred-shadow border border-outline-variant/20 flex flex-col items-center justify-center gap-2 hover:bg-surface-container-low transition-colors group">
+<div class="w-12 h-12 rounded-full bg-secondary-container/20 text-secondary flex items-center justify-center group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">restaurant</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface text-center">Local Food</span>
+</button>
+<button class="bg-surface-container-lowest rounded-xl p-4 sacred-shadow border border-outline-variant/20 flex flex-col items-center justify-center gap-2 hover:bg-surface-container-low transition-colors group">
+<div class="w-12 h-12 rounded-full bg-error-container/20 text-error flex items-center justify-center group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">warning</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface text-center">Scam Alerts</span>
+</button>
+<a class="bg-surface-container-lowest rounded-xl p-4 sacred-shadow border border-outline-variant/20 flex flex-col items-center justify-center gap-2 hover:bg-surface-container-low transition-colors group cursor-pointer" href="#budget-stay-finder">
+<div class="w-12 h-12 rounded-full bg-primary-container/20 text-primary flex items-center justify-center group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">hotel</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface text-center">Budget Stay</span>
+</a>
+<button class="bg-surface-container-lowest rounded-xl p-4 sacred-shadow border border-outline-variant/20 flex flex-col items-center justify-center gap-2 hover:bg-surface-container-low transition-colors group">
+<div class="w-12 h-12 rounded-full bg-error/10 text-error flex items-center justify-center group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">emergency</span>
+</div>
+<span class="font-label-md text-label-md text-error text-center">Emergency</span>
+</button>
+</div>
+</section>
+<!-- Scam of the Day Banner -->
+<section class="bg-primary-container text-on-primary-container rounded-xl p-4 flex items-start gap-4 shadow-sm">
+<span class="material-symbols-outlined text-3xl shrink-0 mt-1" style="font-variation-settings: 'FILL' 1;">campaign</span>
+<div>
+<h3 class="font-title-lg text-title-lg mb-1">Scam Alert: Fake "VIP" Darshan Tickets</h3>
+<p class="font-body-sm opacity-90">Avoid touts selling fast-track passes near the main gates. All official passes are only available through the administration portal or verified kiosks.</p>
+</div>
+</section>
+<!-- Community Tips -->
+<section>
+<div class="flex justify-between items-end mb-stack-md">
+<h2 class="font-title-lg text-title-lg text-on-surface">Nashikkar Tips</h2>
+<button class="text-primary font-label-md text-label-md hover:underline">View All</button>
+</div>
+<div class="flex overflow-x-auto no-scrollbar gap-4 pb-2 -mx-margin-mobile px-margin-mobile md:mx-0 md:px-0">
+<div class="min-w-[280px] max-w-[280px] bg-surface-container-lowest rounded-xl p-4 sacred-shadow border border-outline-variant/20 shrink-0">
+<div class="flex items-center gap-2 mb-3">
+<div class="w-8 h-8 rounded-full bg-tertiary-container text-on-tertiary-container flex items-center justify-center font-bold">R</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Rahul D.</p>
+<p class="text-[10px] text-on-surface-variant">Local Resident • 2h ago</p>
+</div>
+</div>
+<p class="font-body-sm text-on-surface">"Best time for evening Aarti is 6 PM. Arrive by 5:30 to get a spot near the main platform. Bring your own water."</p>
+</div>
+<div class="min-w-[280px] max-w-[280px] bg-surface-container-lowest rounded-xl p-4 sacred-shadow border border-outline-variant/20 shrink-0">
+<div class="flex items-center gap-2 mb-3">
+<div class="w-8 h-8 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center font-bold">S</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Sneha P.</p>
+<p class="text-[10px] text-on-surface-variant">Volunteer • 5h ago</p>
+</div>
+</div>
+<p class="font-body-sm text-on-surface">"Rickshaw fare from station to Ramkund is fixed at ₹50/seat. Don't pay more. Show them the app if they argue."</p>
+</div>
+<div class="min-w-[280px] max-w-[280px] bg-surface-container-lowest rounded-xl p-4 sacred-shadow border border-outline-variant/20 shrink-0 flex items-center justify-center">
+<button class="text-primary font-label-md text-label-md flex flex-col items-center gap-1">
+<span class="material-symbols-outlined">add_circle</span>
+                             Share a Tip
+                        </button>
+</div>
+</div>
+</section>
+<!-- Upcoming Snan Dates -->
+<section class="mb-stack-lg">
+<h2 class="font-title-lg text-title-lg text-on-surface mb-stack-md">Upcoming Shahi Snan</h2>
+<div class="flex overflow-x-auto no-scrollbar gap-3 pb-2 -mx-margin-mobile px-margin-mobile md:mx-0 md:px-0">
+<div class="bg-surface-container-high rounded-full px-4 py-2 flex items-center gap-2 shrink-0 border border-outline-variant/30">
+<span class="font-label-md text-label-md text-on-surface">20 Feb</span>
+<div class="w-2 h-2 rounded-full bg-orange-500" title="Medium Crowd Expected"></div>
+</div>
+<div class="bg-surface-container-high rounded-full px-4 py-2 flex items-center gap-2 shrink-0 border border-outline-variant/30">
+<span class="font-label-md text-label-md text-on-surface">5 Mar</span>
+<div class="w-2 h-2 rounded-full bg-red-500 pulse-green" style="animation-name: pulse-red;" title="Heavy Crowd Expected"></div>
+</div>
+<div class="bg-surface-container-high rounded-full px-4 py-2 flex items-center gap-2 shrink-0 border border-outline-variant/30 opacity-60">
+<span class="font-label-md text-label-md text-on-surface">15 Mar</span>
+<div class="w-2 h-2 rounded-full bg-green-500" title="Low Crowd Expected"></div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- AI Guide FAB -->
+<button class="fixed bottom-[88px] md:bottom-8 right-margin-mobile md:right-8 z-50 bg-[#ff9933] text-white rounded-2xl p-4 sacred-shadow flex items-center gap-2 hover:bg-[#e68a2e] transition-colors shadow-lg">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+<span class="font-label-md text-label-md pr-2">Ask Kumbh Guide</span>
+</button>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 py-3 pb-safe shadow-[0_-4px_12px_rgba(122,24,24,0.05)] bg-surface rounded-t-xl md:hidden">
+<button class="flex flex-col items-center justify-center bg-tertiary-container text-on-tertiary-container rounded-full px-4 py-1 scale-90 duration-200 ease-in-out group">
+<span class="material-symbols-outlined group-hover:text-primary transition-all" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-label-md text-[10px] mt-1 group-hover:text-primary transition-all">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 group">
+<span class="material-symbols-outlined group-hover:text-primary transition-all">map</span>
+<span class="font-label-md text-[10px] mt-1 group-hover:text-primary transition-all">Map</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 group">
+<span class="material-symbols-outlined group-hover:text-primary transition-all">payments</span>
+<span class="font-label-md text-[10px] mt-1 group-hover:text-primary transition-all">Fares</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 group">
+<span class="material-symbols-outlined group-hover:text-primary transition-all">restaurant</span>
+<span class="font-label-md text-[10px] mt-1 group-hover:text-primary transition-all">Food</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 group">
+<span class="material-symbols-outlined group-hover:text-primary transition-all">emergency</span>
+<span class="font-label-md text-[10px] mt-1 group-hover:text-primary transition-all">SOS</span>
+</button>
+</nav>
+<style>
+        @keyframes pulse-red {
+            0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+            70% { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+        }
+        /* Safe area padding for bottom nav on mobile */
+        @supports (padding-bottom: env(safe-area-inset-bottom)) {
+            .pb-safe {
+                padding-bottom: calc(0.75rem + env(safe-area-inset-bottom));
+            }
+        }
+    </style>
+</body></html>

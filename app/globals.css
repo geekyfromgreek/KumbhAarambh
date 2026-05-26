@@ -1,0 +1,170 @@
+@import "tailwindcss";
+
+@theme {
+  /* Brand color system mapped from mockups */
+  --color-primary: #a33800;
+  --color-primary-container: #cc4800;
+  --color-primary-fixed: #ffdbce;
+  --color-primary-fixed-dim: #ffb59a;
+  --color-on-primary: #ffffff;
+  --color-on-primary-container: #fffbff;
+  --color-on-primary-fixed: #370e00;
+
+  --color-secondary: #a63934;
+  --color-secondary-container: #ff7b72;
+  --color-secondary-fixed: #ffdad6;
+  --color-on-secondary: #ffffff;
+  --color-on-secondary-container: #731214;
+
+  --color-tertiary: #765700;
+  --color-tertiary-container: #956e00;
+  --color-tertiary-fixed: #ffdfa0;
+  --color-tertiary-fixed-dim: #f6be39;
+  --color-on-tertiary: #ffffff;
+  --color-on-tertiary-container: #fffbff;
+
+  --color-surface: #fff8f0;
+  --color-surface-dim: #e0d9d0;
+  --color-surface-bright: #fff8f0;
+  --color-surface-container: #f4ede3;
+  --color-surface-container-low: #faf3e9;
+  --color-surface-container-high: #eee7dd;
+  --color-surface-container-highest: #e8e2d8;
+  --color-surface-container-lowest: #ffffff;
+
+  --color-on-surface: #1e1b16;
+  --color-on-surface-variant: #5a4138;
+  --color-outline: #8e7166;
+  --color-outline-variant: #e2bfb2;
+
+  --color-error: #ba1a1a;
+  --color-error-container: #ffdad6;
+  --color-on-error: #ffffff;
+  --color-on-error-container: #93000a;
+
+  /* Custom Spacing */
+  --spacing-stack-sm: 4px;
+  --spacing-stack-md: 12px;
+  --spacing-stack-lg: 24px;
+  --spacing-margin-mobile: 20px;
+  --spacing-margin-desktop: 40px;
+  --spacing-gutter: 16px;
+  --spacing-base: 8px;
+  
+  /* Font weights & styles */
+  --font-sans: 'Plus Jakarta Sans', 'Be Vietnam Pro', ui-sans-serif, system-ui;
+}
+
+/* Custom background pattern */
+.rangoli-bg {
+  background-image: url('data:image/svg+xml;utf8,<svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M20 0c0 11.046-8.954 20-20 20 11.046 0 20 8.954 20 20 0-11.046 8.954-20 20-20-11.046 0-20-8.954-20-20z" fill="%23cc4800" fill-opacity="0.03"/></svg>');
+  background-size: 80px 80px;
+}
+
+.rangoli-bg-dark {
+  background-image: url('data:image/svg+xml;utf8,<svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M20 0c0 11.046-8.954 20-20 20 11.046 0 20 8.954 20 20 0-11.046 8.954-20 20-20-11.046 0-20-8.954-20-20z" fill="%23f6be39" fill-opacity="0.02"/></svg>');
+  background-size: 80px 80px;
+}
+
+/* Marigold line divider decoration */
+.marigold-divider {
+  position: relative;
+  text-align: center;
+}
+.marigold-divider::before,
+.marigold-divider::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 38%;
+  height: 1px;
+  background: rgba(166, 57, 52, 0.15);
+}
+.marigold-divider::before { left: 0; }
+.marigold-divider::after { right: 0; }
+
+/* Premium Glassmorphism styling */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.dark .glass-panel {
+  background: rgba(21, 18, 14, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(204, 72, 0, 0.12);
+}
+
+/* Ambient shadow styling for holy glow elements */
+.sacred-shadow {
+  box-shadow: 0 12px 32px -8px rgba(163, 56, 0, 0.08);
+}
+
+.sacred-shadow-lg {
+  box-shadow: 0 20px 40px -12px rgba(163, 56, 0, 0.12);
+}
+
+.sacred-shadow-error {
+  box-shadow: 0 12px 32px -8px rgba(186, 26, 26, 0.12);
+}
+
+/* Hide default scrollbars */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Leaflet maps styling overrides to match theme */
+.leaflet-container {
+  font-family: inherit;
+  border-radius: 12px;
+  background-color: #fffdf9 !important;
+}
+
+.leaflet-bar {
+  border: none !important;
+  box-shadow: 0 4px 12px rgba(163, 56, 0, 0.1) !important;
+}
+
+.leaflet-bar a {
+  background-color: #ffffff !important;
+  color: #a33800 !important;
+  border-bottom: 1px solid #f4ede3 !important;
+}
+
+.leaflet-bar a:hover {
+  background-color: #fcf8f2 !important;
+  color: #cc4800 !important;
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* 3D Perspective and rotation classes */
+.perspective-1000 {
+  perspective: 1000px;
+}
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
+.backface-hidden {
+  backface-visibility: hidden;
+}
+.translate-z-10 {
+  transform: translateZ(10px);
+}
+.translate-z-20 {
+  transform: translateZ(20px);
+}
+.translate-z-30 {
+  transform: translateZ(30px);
+}
+

@@ -1,0 +1,283 @@
+<!DOCTYPE html><html class="light" lang="en"><head><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Safe Ghats - KumbhAarambh</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700&amp;family=Be+Vietnam+Pro:wght@400;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed-variant": "#5c4300",
+                        "surface-container-highest": "#e8e2d8",
+                        "secondary-fixed": "#ffdad6",
+                        "primary-fixed": "#ffdbce",
+                        "inverse-on-surface": "#f7f0e6",
+                        "on-secondary-container": "#731214",
+                        "on-surface-variant": "#5a4138",
+                        "on-primary-container": "#fffbff",
+                        "tertiary": "#765700",
+                        "surface-container-low": "#faf3e9",
+                        "on-secondary-fixed-variant": "#86211f",
+                        "on-tertiary-fixed": "#261a00",
+                        "on-primary-fixed": "#370e00",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-container": "#fffbff",
+                        "surface": "#fff8f0",
+                        "surface-container-high": "#eee7dd",
+                        "background": "#fff8f0",
+                        "on-primary": "#ffffff",
+                        "on-background": "#1e1b16",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed-dim": "#f6be39",
+                        "outline-variant": "#e2bfb2",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed": "#410003",
+                        "secondary": "#a63934",
+                        "secondary-container": "#ff7b72",
+                        "surface-bright": "#fff8f0",
+                        "tertiary-container": "#956e00",
+                        "on-primary-fixed-variant": "#802a00",
+                        "primary-container": "#cc4800",
+                        "primary-fixed-dim": "#ffb59a",
+                        "on-surface": "#1e1b16",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed-dim": "#ffb3ad",
+                        "surface-dim": "#e0d9d0",
+                        "inverse-primary": "#ffb59a",
+                        "surface-tint": "#a73a00",
+                        "primary": "#a33800",
+                        "error-container": "#ffdad6",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed": "#ffdfa0",
+                        "outline": "#8e7166",
+                        "surface-container": "#f4ede3",
+                        "inverse-surface": "#33302a",
+                        "surface-variant": "#e8e2d8",
+                        "on-error": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-md": "12px",
+                        "stack-lg": "24px",
+                        "margin-mobile": "20px",
+                        "base": "8px",
+                        "margin-desktop": "40px",
+                        "gutter": "16px",
+                        "stack-sm": "4px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "body-sm": ["Be Vietnam Pro"],
+                        "display-lg-mobile": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "body-lg": ["Be Vietnam Pro"],
+                        "label-md": ["Be Vietnam Pro"],
+                        "title-lg": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "500" }],
+                        "body-sm": ["13px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "display-lg-mobile": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "display-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "body-lg": ["15px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "title-lg": ["20px", { "lineHeight": "28px", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            -webkit-tap-highlight-color: transparent;
+        }
+        .marigold-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: var(--spacing-stack-md) 0;
+            opacity: 0.6;
+        }
+        .marigold-divider::before,
+        .marigold-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: currentColor;
+            opacity: 0.2;
+        }
+        .marigold-divider::before { margin-right: 8px; }
+        .marigold-divider::after { margin-left: 8px; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDm8drjn_qeWAvVGc5WnQihNr_lcHZW36O2WyWKIZJUVFI-kec_0vllWNFYx0I-6vg767Sin7kYUaU0QKe-cbk3HzlRfSPUP7RCWgPYQY4ufHzj0vNT7FHdo0AKMoPaPTuWwZeLxUiJ9e4_-oSvYNKyEfiOGGrtDzenA5sV-B8aNflpbUNvqWjAIyGFcf7CEi3SRHYGe7xWVaulddPW7lv-nv3FLBFOl7-xnNgUC2Q01BDw4UuqldE__U6mnTQy0OUtWTlD6mT6ov4'); background-size: cover; background-position: center; opacity: 0.1; z-index: -1; pointer-events: none; }</style></head>
+<body class="bg-background text-on-background min-h-screen flex flex-col pb-safe pt-16 pb-20">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile h-16 bg-surface dark:bg-surface-dim shadow-sm dark:shadow-none border-b-8 border-tertiary dark:border-tertiary-container">
+<button class="text-primary dark:text-primary-fixed-dim hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors rounded-full p-2 flex items-center justify-center">
+<span class="material-symbols-outlined">light_mode</span>
+</button>
+<div class="flex items-center gap-2 font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">
+            KumbhAarambh
+        </div>
+<button class="text-primary dark:text-primary-fixed-dim hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors rounded-full px-3 py-1.5 flex items-center gap-1 bg-error-container text-on-error-container font-label-md text-label-md rounded-full shadow-sm">
+<span class="material-symbols-outlined text-[18px]">notifications</span>
+            SOS
+        </button>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow px-margin-mobile py-stack-lg max-w-[1200px] mx-auto w-full md:px-margin-desktop md:grid md:grid-cols-12 md:gap-gutter">
+<!-- Page Header -->
+<div class="md:col-span-12 mb-stack-lg">
+<h1 class="font-display-lg-mobile text-display-lg-mobile md:font-display-lg md:text-display-lg text-primary mb-stack-sm flex items-center gap-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">water</span>
+                Safe Ghats
+            </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Real-time safety and crowd monitoring for major bathing areas.</p>
+</div>
+<!-- Filter Chips (Desktop could be a sidebar, but keeping simple for this layout) -->
+<div class="md:col-span-12 mb-stack-md flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+<button class="px-4 py-1.5 bg-tertiary-fixed-dim bg-opacity-15 text-secondary font-label-md text-label-md rounded-full border border-tertiary border-opacity-20 whitespace-nowrap">All Ghats</button>
+<button class="px-4 py-1.5 bg-surface-container-high text-on-surface-variant font-label-md text-label-md rounded-full whitespace-nowrap">Low Crowd</button>
+<button class="px-4 py-1.5 bg-surface-container-high text-on-surface-variant font-label-md text-label-md rounded-full whitespace-nowrap">Family Friendly</button>
+</div>
+<!-- Bento Grid for Cards -->
+<div class="md:col-span-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-stack-lg">
+<!-- Card 1: Ramkund -->
+<article class="bg-surface-container-lowest rounded-xl p-stack-md shadow-[0_12px_24px_-12px_rgba(122,24,24,0.05)] border border-outline-variant border-opacity-30 relative overflow-hidden flex flex-col h-full">
+<div class="h-40 rounded-lg bg-surface-container-high mb-stack-md relative overflow-hidden">
+<img alt="Ramkund Ghat" class="w-full h-full object-cover" data-alt="A beautifully composed photograph of Ramkund Ghat during a serene early morning. The warm, saffron-tinted sunlight reflects off the sacred water, illuminating the ancient stone steps. A few pilgrims are seen offering prayers, creating a peaceful, guiding mood. The high-key lighting enhances the modern, trustworthy aesthetic of the KumbhAarambh brand, with distinct maroon and warm ivory accents visible in the architectural details." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_K3H3nSt6MmZ_wsfpBPr5h_gmfgzqbOvpUvxZtWE968sEtbn8DQlqsjCU2pqQqPxHoKMKtnQw_61br5X8QQHxRcq4aEh19F1o_Ap8Fm0veybeZnQ0VPRnaRrdBLVDl31112YVrB5a5l6vOsMpOMqLEH6FS7O0lgOhy9wcLY-fgKFPM5oRP-rL2BNxCVFr6mDc6reA2WMeBg40nlIPxBmhJkyjaH49A_IhVZcIAPCN7Z2vFUDg4u0rLtr-0VW2M-LrqKVGff0ZpPM">
+<div class="absolute top-2 right-2 bg-error-container text-on-error-container font-label-md text-label-md px-2 py-1 rounded-full flex items-center gap-1 shadow-sm backdrop-blur-md bg-opacity-90">
+<span class="w-2 h-2 rounded-full bg-error animate-pulse"></span>
+                        High Crowd
+                    </div>
+</div>
+<div class="flex-grow flex flex-col">
+<h2 class="font-title-lg text-title-lg text-primary mb-1">Ramkund</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-stack-md line-clamp-2">The most sacred bathing ghat. Expect heavy crowds during major Snan days.</p>
+<div class="marigold-divider text-secondary">
+<span class="material-symbols-outlined text-[14px]">local_florist</span>
+</div>
+<div class="grid grid-cols-2 gap-stack-sm mb-stack-md">
+<div class="bg-surface-container-low p-2 rounded-md flex flex-col gap-1">
+<span class="font-label-md text-label-md text-secondary flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">schedule</span> Best Time</span>
+<span class="font-body-sm text-body-sm text-on-surface">4:00 AM - 6:00 AM</span>
+</div>
+<div class="bg-surface-container-low p-2 rounded-md flex flex-col gap-1">
+<span class="font-label-md text-label-md text-secondary flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">security</span> Safety</span>
+<span class="font-body-sm text-body-sm text-on-surface">Hold handrails</span>
+</div>
+</div>
+</div>
+<button class="w-full bg-primary text-on-primary font-label-md text-label-md py-3 rounded-xl flex items-center justify-center gap-2 hover:bg-primary-container transition-colors mt-auto shadow-[0_4px_12px_rgba(163,56,0,0.2)]">
+<span class="material-symbols-outlined">navigation</span>
+                    Navigate
+                </button>
+</article>
+<!-- Card 2: Tapovan -->
+<article class="bg-surface-container-lowest rounded-xl p-stack-md shadow-[0_12px_24px_-12px_rgba(122,24,24,0.05)] border border-outline-variant border-opacity-30 relative overflow-hidden flex flex-col h-full">
+<div class="h-40 rounded-lg bg-surface-container-high mb-stack-md relative overflow-hidden">
+<img alt="Tapovan Ghat" class="w-full h-full object-cover" data-alt="A tranquil digital photograph of Tapovan Ghat in the late afternoon. The scene features lush green trees framing the quiet stone banks leading into the calm river. The lighting is soft and golden, embodying a sacred, warm, and calming atmosphere suitable for a modern companion app. The color palette focuses on earthy greens, warm ivory stones, and gentle saffron sunlight, evoking a sense of trust and sanctuary." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDb3Lr4P0kR88O8cZkKLWeCAuWb-J5CE4G82HctLx8NvG5tk7XtfcZoOm26xDbJlcRevjlO7mk2bQ14KTtWPMyxVa0fW-osgahJmR6tnEdWItJPxXFgMSWleqe3M0bnjsJQWr3vQ7XwHxmLBYp432hlQJeoikOapoELXwvy25n6FUClXB3towwyaR2607QvXKRSDdb3RCclg8JBCnnZrIZga7umXlxXpIQTI2iK47fDAgbmgYZTi0sXLqKA3pQQmdk6UdLObfzniNc">
+<div class="absolute top-2 right-2 bg-[#dcfce7] text-[#166534] font-label-md text-label-md px-2 py-1 rounded-full flex items-center gap-1 shadow-sm backdrop-blur-md bg-opacity-90">
+<span class="w-2 h-2 rounded-full bg-[#166534]"></span>
+                        Low Crowd
+                    </div>
+</div>
+<div class="flex-grow flex flex-col">
+<h2 class="font-title-lg text-title-lg text-primary mb-1">Tapovan</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-stack-md line-clamp-2">A peaceful area known for meditation and lesser crowds. Ideal for families.</p>
+<div class="marigold-divider text-secondary">
+<span class="material-symbols-outlined text-[14px]">local_florist</span>
+</div>
+<div class="grid grid-cols-2 gap-stack-sm mb-stack-md">
+<div class="bg-surface-container-low p-2 rounded-md flex flex-col gap-1">
+<span class="font-label-md text-label-md text-secondary flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">schedule</span> Best Time</span>
+<span class="font-body-sm text-body-sm text-on-surface">Anytime</span>
+</div>
+<div class="bg-surface-container-low p-2 rounded-md flex flex-col gap-1">
+<span class="font-label-md text-label-md text-secondary flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">family_restroom</span> Vibe</span>
+<span class="font-body-sm text-body-sm text-on-surface">Calm, Quiet</span>
+</div>
+</div>
+</div>
+<button class="w-full bg-primary text-on-primary font-label-md text-label-md py-3 rounded-xl flex items-center justify-center gap-2 hover:bg-primary-container transition-colors mt-auto shadow-[0_4px_12px_rgba(163,56,0,0.2)]">
+<span class="material-symbols-outlined">navigation</span>
+                    Navigate
+                </button>
+</article>
+<!-- Card 3: Triveni Sangam -->
+<article class="bg-surface-container-lowest rounded-xl p-stack-md shadow-[0_12px_24px_-12px_rgba(122,24,24,0.05)] border border-outline-variant border-opacity-30 relative overflow-hidden flex flex-col h-full">
+<div class="h-40 rounded-lg bg-surface-container-high mb-stack-md relative overflow-hidden">
+<img alt="Triveni Sangam" class="w-full h-full object-cover" data-alt="A wide-angle, high-quality image of the Triveni Sangam convergence point. The water displays subtle color variations where the rivers meet, beneath a bright, clear sky. Colorful boats are docked along the clean, geometric steps. The lighting is crisp and modern, reflecting the light-mode UI style, with vibrant saffron and deep maroon accents from pilgrims' garments adding a tactile cultural element to the minimalist composition." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsRwOLvHQTY8mYfDlnfj7bRPPUJG6Med0nKTbMr8-Bi6TD6-DhpOwXnN8QvSlRhChRDa7lw7zqaiI0S0pWyF9JOQ7tQSkRBJsnlAIbUbHcB4E4UC_fE2OiuIH3aVDu5zOBi7NZ2PeujLIJ8dRmt4dNNipQbvQhTSlRODBLgL7rIii0UsC70z_JQKDV43tYjGDlv8kUihLyAv-3Ujv44KKSUkO6wlXfpv0KdiRhCFPtGBz7aJX0x7eUYQ2hR-x5kFmyQq-8FQZwDps">
+<div class="absolute top-2 right-2 bg-tertiary-fixed-dim bg-opacity-90 text-on-tertiary-fixed-variant font-label-md text-label-md px-2 py-1 rounded-full flex items-center gap-1 shadow-sm backdrop-blur-md">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+                        Moderate Crowd
+                    </div>
+</div>
+<div class="flex-grow flex flex-col">
+<h2 class="font-title-lg text-title-lg text-primary mb-1">Triveni Sangam</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-stack-md line-clamp-2">The confluence of three sacred rivers. Highly auspicious but requires careful navigation.</p>
+<div class="marigold-divider text-secondary">
+<span class="material-symbols-outlined text-[14px]">local_florist</span>
+</div>
+<div class="grid grid-cols-2 gap-stack-sm mb-stack-md">
+<div class="bg-surface-container-low p-2 rounded-md flex flex-col gap-1">
+<span class="font-label-md text-label-md text-secondary flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">schedule</span> Best Time</span>
+<span class="font-body-sm text-body-sm text-on-surface">Morning Aarti</span>
+</div>
+<div class="bg-surface-container-low p-2 rounded-md flex flex-col gap-1">
+<span class="font-label-md text-label-md text-secondary flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">warning</span> Alert</span>
+<span class="font-body-sm text-body-sm text-on-surface">Slippery steps</span>
+</div>
+</div>
+</div>
+<button class="w-full bg-primary text-on-primary font-label-md text-label-md py-3 rounded-xl flex items-center justify-center gap-2 hover:bg-primary-container transition-colors mt-auto shadow-[0_4px_12px_rgba(163,56,0,0.2)]">
+<span class="material-symbols-outlined">navigation</span>
+                    Navigate
+                </button>
+</article>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<button class="fixed bottom-24 right-4 z-[60] flex items-center gap-2 bg-tertiary text-on-tertiary px-5 py-3 rounded-full shadow-lg hover:bg-tertiary-container transition-all transform active:scale-95 md:bottom-10 md:right-10">
+<span class="material-symbols-outlined text-[24px]">smart_toy</span>
+<span class="font-label-md text-label-md font-bold tracking-wide">Ask Kumbh Guide</span>
+</button><nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 py-3 pb-safe shadow-[0_-4px_12px_rgba(122,24,24,0.05)] dark:shadow-none bg-surface dark:bg-surface-dim rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:text-primary dark:hover:text-primary-fixed-dim transition-all" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-md text-label-md mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-tertiary-container dark:bg-tertiary text-on-tertiary-container dark:text-on-tertiary rounded-full px-4 py-1 scale-90 duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">map</span>
+<span class="font-label-md text-label-md mt-1">Map</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:text-primary dark:hover:text-primary-fixed-dim transition-all" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-label-md text-label-md mt-1">Fares</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:text-primary dark:hover:text-primary-fixed-dim transition-all" href="#">
+<span class="material-symbols-outlined">restaurant</span>
+<span class="font-label-md text-label-md mt-1">Food</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:text-primary dark:hover:text-primary-fixed-dim transition-all" href="#">
+<span class="material-symbols-outlined text-error">emergency</span>
+<span class="font-label-md text-label-md mt-1 text-error">SOS</span>
+</a>
+</nav>
+</body></html>
