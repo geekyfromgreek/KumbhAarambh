@@ -54,20 +54,20 @@ export default function Header() {
         <div>
           <h1 
             onClick={() => router.push(role === "NASHIKKAR" ? "/nashikkar" : "/yatri")}
-            className="text-lg font-bold text-primary tracking-tight cursor-pointer"
+            className="text-sm sm:text-lg font-bold text-primary tracking-tight cursor-pointer"
           >
             KumbhAarambh
           </h1>
-          <span className="text-[10px] text-secondary font-medium tracking-wider uppercase">
+          <span className="text-[9px] sm:text-[10px] text-secondary font-medium tracking-wider uppercase block -mt-0.5">
             नाशिक कुंभमेळा
           </span>
         </div>
       </div>
 
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-2 sm:gap-3">
         {/* User Name Badge (Clerk authenticated) */}
         {isSignedIn && displayName && (
-          <div className="px-3 py-1 rounded-full text-[10px] font-extrabold flex items-center gap-1.5 border tracking-wider bg-primary-fixed/50 text-primary border-primary/20">
+          <div className="hidden sm:flex px-3 py-1 rounded-full text-[10px] font-extrabold items-center gap-1.5 border tracking-wider bg-primary-fixed/50 text-primary border-primary/20">
             <span className="material-symbols-outlined text-sm font-bold">person</span>
             {displayName}
           </div>
@@ -75,7 +75,7 @@ export default function Header() {
 
         {/* Role Badge */}
         {role && (
-          <div className={`px-3 py-1 rounded-full text-[10px] font-extrabold flex items-center gap-1.5 border tracking-wider uppercase shadow-sm ${
+          <div className={`px-2 sm:px-3 py-1 rounded-full text-[10px] font-extrabold flex items-center gap-1 sm:gap-1.5 border tracking-wider uppercase shadow-sm ${
             role === "NASHIKKAR" 
               ? "bg-secondary-fixed text-on-secondary-fixed border-secondary/20"
               : isGuest
@@ -85,7 +85,12 @@ export default function Header() {
             <span className="material-symbols-outlined text-sm font-bold">
               {role === "NASHIKKAR" ? "volunteer_activism" : isGuest ? "visibility" : "badge"}
             </span>
-            {role === "NASHIKKAR" ? "Nashikkar Volunteer" : isGuest ? "Guest Yatri" : "Yatri pilgrim"}
+            <span className="hidden sm:inline">
+              {role === "NASHIKKAR" ? "Nashikkar Volunteer" : isGuest ? "Guest Yatri" : "Yatri pilgrim"}
+            </span>
+            <span className="inline sm:hidden text-[8px]">
+              {role === "NASHIKKAR" ? "Host" : isGuest ? "Guest" : "Yatri"}
+            </span>
           </div>
         )}
 
