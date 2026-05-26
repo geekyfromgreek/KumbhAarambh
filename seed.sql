@@ -95,8 +95,15 @@ CREATE TABLE IF NOT EXISTS lost_items (
 );
 
 -- Enable Realtime subscriptions for all tables (safe drop-and-readd to avoid duplicate membership errors)
-alter publication supabase_realtime drop table if exists stays, bookings, food_spots, reviews, ghats, overcharge_reports, lost_items;
-alter publication supabase_realtime add table stays, bookings, food_spots, reviews, ghats, overcharge_reports, lost_items;
+DO $$ BEGIN ALTER PUBLICATION supabase_realtime DROP TABLE stays; EXCEPTION WHEN OTHERS THEN NULL; END $$;
+DO $$ BEGIN ALTER PUBLICATION supabase_realtime DROP TABLE bookings; EXCEPTION WHEN OTHERS THEN NULL; END $$;
+DO $$ BEGIN ALTER PUBLICATION supabase_realtime DROP TABLE food_spots; EXCEPTION WHEN OTHERS THEN NULL; END $$;
+DO $$ BEGIN ALTER PUBLICATION supabase_realtime DROP TABLE reviews; EXCEPTION WHEN OTHERS THEN NULL; END $$;
+DO $$ BEGIN ALTER PUBLICATION supabase_realtime DROP TABLE ghats; EXCEPTION WHEN OTHERS THEN NULL; END $$;
+DO $$ BEGIN ALTER PUBLICATION supabase_realtime DROP TABLE overcharge_reports; EXCEPTION WHEN OTHERS THEN NULL; END $$;
+DO $$ BEGIN ALTER PUBLICATION supabase_realtime DROP TABLE lost_items; EXCEPTION WHEN OTHERS THEN NULL; END $$;
+
+ALTER PUBLICATION supabase_realtime ADD TABLE stays, bookings, food_spots, reviews, ghats, overcharge_reports, lost_items;
 
 -- Enable RLS on all tables
 ALTER TABLE stays ENABLE ROW LEVEL SECURITY;
@@ -108,25 +115,54 @@ ALTER TABLE overcharge_reports ENABLE ROW LEVEL SECURITY;
 ALTER TABLE lost_items ENABLE ROW LEVEL SECURITY;
 
 -- Public READ access for all tables (anyone can view)
+DROP POLICY IF EXISTS "Public read stays" ON stays;
 CREATE POLICY "Public read stays" ON stays FOR SELECT USING (true);
+
+DROP POLICY IF EXISTS "Public read bookings" ON bookings;
 CREATE POLICY "Public read bookings" ON bookings FOR SELECT USING (true);
+
+DROP POLICY IF EXISTS "Public read food_spots" ON food_spots;
 CREATE POLICY "Public read food_spots" ON food_spots FOR SELECT USING (true);
+
+DROP POLICY IF EXISTS "Public read reviews" ON reviews;
 CREATE POLICY "Public read reviews" ON reviews FOR SELECT USING (true);
+
+DROP POLICY IF EXISTS "Public read ghats" ON ghats;
 CREATE POLICY "Public read ghats" ON ghats FOR SELECT USING (true);
+
+DROP POLICY IF EXISTS "Public read overcharge_reports" ON overcharge_reports;
 CREATE POLICY "Public read overcharge_reports" ON overcharge_reports FOR SELECT USING (true);
+
+DROP POLICY IF EXISTS "Public read lost_items" ON lost_items;
 CREATE POLICY "Public read lost_items" ON lost_items FOR SELECT USING (true);
 
 -- Public INSERT access for user-submitted data
+DROP POLICY IF EXISTS "Public insert reviews" ON reviews;
 CREATE POLICY "Public insert reviews" ON reviews FOR INSERT WITH CHECK (true);
+
+DROP POLICY IF EXISTS "Public insert bookings" ON bookings;
 CREATE POLICY "Public insert bookings" ON bookings FOR INSERT WITH CHECK (true);
+
+DROP POLICY IF EXISTS "Public insert overcharge_reports" ON overcharge_reports;
 CREATE POLICY "Public insert overcharge_reports" ON overcharge_reports FOR INSERT WITH CHECK (true);
+
+DROP POLICY IF EXISTS "Public insert stays" ON stays;
 CREATE POLICY "Public insert stays" ON stays FOR INSERT WITH CHECK (true);
+
+DROP POLICY IF EXISTS "Public insert food_spots" ON food_spots;
 CREATE POLICY "Public insert food_spots" ON food_spots FOR INSERT WITH CHECK (true);
+
+DROP POLICY IF EXISTS "Public insert lost_items" ON lost_items;
 CREATE POLICY "Public insert lost_items" ON lost_items FOR INSERT WITH CHECK (true);
 
 -- Public UPDATE for ghats (crowd status updates from Nashikkar)
+DROP POLICY IF EXISTS "Public update ghats" ON ghats;
 CREATE POLICY "Public update ghats" ON ghats FOR UPDATE USING (true) WITH CHECK (true);
+
+DROP POLICY IF EXISTS "Public update bookings" ON bookings;
 CREATE POLICY "Public update bookings" ON bookings FOR UPDATE USING (true) WITH CHECK (true);
+
+DROP POLICY IF EXISTS "Public update lost_items" ON lost_items;
 CREATE POLICY "Public update lost_items" ON lost_items FOR UPDATE USING (true) WITH CHECK (true);
 
 -- Clean existing seeds (optional but safe)

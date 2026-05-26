@@ -148,9 +148,9 @@ export default function NetflixIntro({ onComplete }: NetflixIntroProps) {
             >
               {/* App Name with premium neon-saffron glow and letter spacing expansion */}
               <motion.h1 
-                initial={{ letterSpacing: "0.15em" }}
+                initial={{ letterSpacing: "0.1em" }}
                 animate={{ 
-                  letterSpacing: "0.28em",
+                  letterSpacing: isMobile ? "0.15em" : "0.28em",
                   textShadow: [
                     "0 0 10px rgba(249,115,22,0.4)", 
                     "0 0 25px rgba(249,115,22,0.8)", 
@@ -158,7 +158,7 @@ export default function NetflixIntro({ onComplete }: NetflixIntroProps) {
                   ],
                   transition: { duration: 3.0, ease: "easeOut" }
                 }}
-                className="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-orange-500 to-red-500 uppercase font-sans tracking-widest filter drop-shadow-[0_4px_8px_rgba(0,0,0,0.8)]"
+                className="text-2xl sm:text-3xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-orange-500 to-red-500 uppercase font-sans tracking-widest filter drop-shadow-[0_4px_8px_rgba(0,0,0,0.8)]"
               >
                 KumbhAarambh
               </motion.h1>
@@ -170,9 +170,9 @@ export default function NetflixIntro({ onComplete }: NetflixIntroProps) {
                   opacity: 0.9,
                   transition: { delay: 0.4, duration: 1.0 } 
                 }}
-                className="text-[12px] md:text-sm font-extrabold text-amber-400/90 tracking-[0.5em] uppercase font-sans filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]"
+                className="text-[10px] sm:text-xs md:text-sm font-extrabold text-amber-400/90 tracking-[0.3em] sm:tracking-[0.5em] uppercase font-sans filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]"
               >
-                कुंभारंभ
+                कुंभआरंभ
               </motion.p>
             </motion.div>
           )}
