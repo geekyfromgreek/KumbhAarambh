@@ -152,6 +152,73 @@ export async function POST(req: NextRequest) {
       region: g.region,
     }));
 
+    // Dynamic OpenStreetMap (Nominatim) search for real map places near user
+    let osmStays: any[] = [];
+    let osmFood: any[] = [];
+    let queryLat = location?.lat;
+    let queryLng = location?.lng;
+
+    try {
+      // If coordinates aren't shared, try to geocode search term if user mentions a place
+      if (!queryLat || !queryLng) {
+        const placeMatch = message.match(/(?:near|at|in)\s+([A-Za-z\s]+)(?:\?|\.|$)/i);
+        if (placeMatch && placeMatch[1]) {
+          const searchLoc = placeMatch[1].trim();
+          const geocodeRes = await fetch(
+            `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(searchLoc + ", Nashik, Maharashtra, India")}&limit=1`,
+            { headers: { "User-Agent": "KumbhAarambh-App" } }
+          );
+          if (geocodeRes.ok) {
+            const geocodeData = await geocodeRes.json();
+            if (geocodeData && geocodeData[0]) {
+              queryLat = parseFloat(geocodeData[0].lat);
+              queryLng = parseFloat(geocodeData[0].lon);
+            }
+          }
+        }
+      }
+
+      // If location is available (either passed or geocoded)
+      if (queryLat && queryLng) {
+        const [osmStaysRes, osmFoodRes] = await Promise.all([
+          fetch(
+            `https://nominatim.openstreetmap.org/search?format=json&q=hotel&lat=${queryLat}&lon=${queryLng}&limit=15`,
+            { headers: { "User-Agent": "KumbhAarambh-App" } }
+          ),
+          fetch(
+            `https://nominatim.openstreetmap.org/search?format=json&q=restaurant&lat=${queryLat}&lon=${queryLng}&limit=15`,
+            { headers: { "User-Agent": "KumbhAarambh-App" } }
+          )
+        ]);
+
+        if (osmStaysRes.ok) {
+          const data = await osmStaysRes.json();
+          if (Array.isArray(data)) {
+            osmStays = data.map((item: any) => ({
+              name: item.name || item.display_name?.split(",")[0] || "Stay Place",
+              address: item.display_name,
+              lat: parseFloat(item.lat),
+              lng: parseFloat(item.lon)
+            }));
+          }
+        }
+
+        if (osmFoodRes.ok) {
+          const data = await osmFoodRes.json();
+          if (Array.isArray(data)) {
+            osmFood = data.map((item: any) => ({
+              name: item.name || item.display_name?.split(",")[0] || "Dining Place",
+              address: item.display_name,
+              lat: parseFloat(item.lat),
+              lng: parseFloat(item.lon)
+            }));
+          }
+        }
+      }
+    } catch (e) {
+      console.error("Nominatim dynamic search failed:", e);
+    }
+
     // Construct the database context dynamically
     const databaseContext = `\n\n[VERIFIED PLACES DATABASE (SUPABASE)]
 Here is the real-time list of verified Stays and Food Spots available in our database. Rely on these when answering questions about local recommendations:
@@ -163,6 +230,16 @@ ${foodList.map(f => `- ${f.name} (${f.type}, Specialty: ${f.specialty}, Price: $
 
 Bathing Ghats:
 ${ghatsList.map(g => `- ${g.name} in ${g.region} [Coords: ${g.lat.toFixed(4)}, ${g.lng.toFixed(4)}]`).join("\n")}
+`;
+
+    // Add external maps context
+    const externalMapsContext = `\n\n[REAL-TIME EXTERNAL MAPS SEARCH RESULTS (OSM/NOMINATIM)]
+These are real-world places fetched in real-time from open map directories near the user's location/target:
+Stays (External Maps):
+${osmStays.map(s => `- ${s.name} at ${s.address} [Coords: ${s.lat.toFixed(4)}, ${s.lng.toFixed(4)}]`).join("\n")}
+
+Food Spots (External Maps):
+${osmFood.map(f => `- ${f.name} at ${f.address} [Coords: ${f.lat.toFixed(4)}, ${f.lng.toFixed(4)}]`).join("\n")}
 `;
 
     let locationContext = "";
@@ -188,7 +265,7 @@ ${ghatsList.map(g => `- ${g.name} in ${g.region} [Coords: ${g.lat.toFixed(4)}, $
       locationContext = `\n\n[USER LOCATION CONTEXT]\nUser live coordinates: Latitude ${userLat.toFixed(4)}, Longitude ${userLng.toFixed(4)}.\nNearest Stays (from database):\n${staysWithDist.slice(0, 3).map((s, idx) => `${idx+1}. ${s.name} - ${s.dist.toFixed(2)} km away.`).join("\n")}\n\nNearest Food Spots (from database):\n${foodWithDist.slice(0, 3).map((f, idx) => `${idx+1}. ${f.name} - ${f.dist.toFixed(2)} km away.`).join("\n")}\n\nNearest Ghats (from database):\n${ghatsWithDist.slice(0, 3).map((g, idx) => `${idx+1}. ${g.name} - ${g.dist.toFixed(2)} km away.`).join("\n")}\n\nPlease suggest these nearby options contextually, BUT DO NOT STOP HERE. Execute the [INTERNET MAP RETRIEVAL DIRECTIVE] and combine these with additional real locations from your internal web knowledge base. Advise them on transit options if needed.`;
     }
 
-    const activeSystemPrompt = SYSTEM_PROMPT + databaseContext + locationContext;
+    const activeSystemPrompt = SYSTEM_PROMPT + databaseContext + externalMapsContext + locationContext;
 
     // Try Groq if key is present
     if (groqApiKey && !groqApiKey.includes("placeholder") && groqApiKey !== "") {
