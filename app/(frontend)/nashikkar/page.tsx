@@ -308,7 +308,7 @@ export default function NashikkarDashboard() {
   const handleCrowdReport = async () => {
     let ghatId = "ghat-1";
     if (crowdGhat === "Talkuteshwar Ghat") ghatId = "ghat-2";
-    else if (crowdGhat === "Lakshman Kund") ghatId = "ghat-3";
+    else if (crowdGhat === "Laxman Kund") ghatId = "ghat-3";
 
     const flag = crowdLevel === "HIGH" ? "RED" : crowdLevel === "MODERATE" ? "YELLOW" : "GREEN";
 
@@ -327,16 +327,28 @@ export default function NashikkarDashboard() {
     }
   };
 
-  const handleFareVerify = (e: React.FormEvent) => {
+  const handleFareVerify = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!fareVerifyRoute || !fareVerifyAmount) return;
-    setFareVerified(true);
-    setTimeout(() => {
-      setFareVerified(false);
-      setFareVerifyRoute("");
-      setFareVerifyAmount("");
-      setFareVerifyRating(5);
-    }, 2500);
+
+    const { error } = await supabase.from("fare_ratings").insert({
+      route: fareVerifyRoute,
+      vehicle: fareVerifyVehicle,
+      fare: Number(fareVerifyAmount),
+      rating: fareVerifyRating
+    });
+
+    if (!error) {
+      setFareVerified(true);
+      setTimeout(() => {
+        setFareVerified(false);
+        setFareVerifyRoute("");
+        setFareVerifyAmount("");
+        setFareVerifyRating(5);
+      }, 2500);
+    } else {
+      console.error("Failed to insert fare rating:", error);
+    }
   };
 
   const dismissOverchargeReport = async (index: number) => {
@@ -766,7 +778,7 @@ export default function NashikkarDashboard() {
                   >
                     <option>Ram Kund (Main Ghat)</option>
                     <option>Talkuteshwar Ghat</option>
-                    <option>Lakshman Kund</option>
+                    <option>Laxman Kund</option>
                   </select>
                   <div className="grid grid-cols-3 gap-2">
                     {(["LOW", "MODERATE", "HIGH"] as const).map((lvl) => (

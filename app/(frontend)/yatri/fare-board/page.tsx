@@ -121,6 +121,9 @@ export default function FareBoard() {
   // Saved overcharge reports
   const [reports, setReports] = useState<OverchargeReport[]>([]);
 
+  // Community verified fare ratings
+  const [fareRatings, setFareRatings] = useState<any[]>([]);
+
   // Login prompt visibility
   const [showLoginPrompt, setShowLoginPrompt] = useState(false);
 
@@ -143,9 +146,22 @@ export default function FareBoard() {
     }
   };
 
-  // Load reports from Supabase and set closest startLoc on mount
+  const fetchFareRatings = async () => {
+    const { data, error } = await supabase
+      .from("fare_ratings")
+      .select("*")
+      .order("created_at", { ascending: false })
+      .limit(20);
+
+    if (!error && data) {
+      setFareRatings(data);
+    }
+  };
+
+  // Load reports and ratings from Supabase and set closest startLoc on mount
   useEffect(() => {
     fetchReports();
+    fetchFareRatings();
 
     const lat = localStorage.getItem("kumbh_user_latitude");
     const lng = localStorage.getItem("kumbh_user_longitude");
@@ -175,15 +191,23 @@ export default function FareBoard() {
       setStartLoc(closestName);
     }
 
-    const subscription = supabase
-      .channel("fare-changes")
+    const reportSubscription = supabase
+      .channel("fare-reports")
       .on("postgres_changes", { event: "*", schema: "public", table: "overcharge_reports" }, () => {
         fetchReports();
       })
       .subscribe();
 
+    const ratingsSubscription = supabase
+      .channel("fare-ratings-changes")
+      .on("postgres_changes", { event: "*", schema: "public", table: "fare_ratings" }, () => {
+        fetchFareRatings();
+      })
+      .subscribe();
+
     return () => {
-      supabase.removeChannel(subscription);
+      supabase.removeChannel(reportSubscription);
+      supabase.removeChannel(ratingsSubscription);
     };
   }, []);
 
@@ -392,69 +416,104 @@ export default function FareBoard() {
           )}
         </div>
 
-        {/* CENTER: Report Overcharging Form */}
-        <div className="md:w-[340px] md:shrink-0 bg-surface-container-lowest border border-outline-variant/30 rounded-2xl p-5 sacred-shadow space-y-4 md:self-start">
-          <h3 className="text-sm font-bold text-on-surface flex items-center gap-2">
-            <AlertTriangle size={16} className="text-secondary animate-pulse" />
-            Report Fare Overcharging
-          </h3>
-          <p className="text-[11px] text-on-surface-variant leading-relaxed">
-            Did a driver charge you more than the official rate? Lodge a quick anonymous complaint. Local police and RTO desks monitor these hotspots.
-          </p>
+        {/* CENTER: Report Overcharging Form & Community Ratings */}
+        <div className="md:w-[340px] md:shrink-0 md:flex md:flex-col md:gap-5 md:overflow-y-auto md:max-h-full no-scrollbar space-y-6 md:space-y-0">
+          <div className="bg-surface-container-lowest border border-outline-variant/30 rounded-2xl p-5 sacred-shadow space-y-4">
+            <h3 className="text-sm font-bold text-on-surface flex items-center gap-2">
+              <AlertTriangle size={16} className="text-secondary animate-pulse" />
+              Report Fare Overcharging
+            </h3>
+            <p className="text-[11px] text-on-surface-variant leading-relaxed">
+              Did a driver charge you more than the official rate? Lodge a quick anonymous complaint. Local police and RTO desks monitor these hotspots.
+            </p>
 
-          {reportSuccess ? (
-            <motion.div 
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              className="text-center py-6 space-y-2 bg-green-50 border border-green-200 rounded-xl"
-            >
-              <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center text-green-600 mx-auto">
-                <CheckCircle2 size={24} />
-              </div>
-              <h4 className="text-xs font-bold text-green-700">Complaint Registered!</h4>
-              <p className="text-[10px] text-on-surface-variant max-w-xs mx-auto px-4">
-                Thank you. Your report from <strong>{startLoc}</strong> to <strong>{destLoc}</strong> has been logged and is now visible below.
-              </p>
-            </motion.div>
-          ) : (
-            <form onSubmit={handleReportSubmit} className="space-y-3">
-              <div className="grid grid-cols-2 gap-3">
-                <div className="space-y-1">
-                  <label className="text-[9px] font-bold text-on-surface-variant uppercase tracking-wide">Vehicle No.</label>
-                  <input
-                    type="text"
-                    required
-                    value={vehicleNumber}
-                    onChange={(e) => setVehicleNumber(e.target.value)}
-                    placeholder="e.g. MH-15-X-1234"
-                    className="w-full p-2.5 bg-surface-container-low border border-outline-variant/30 rounded-lg text-xs outline-none focus:ring-1 focus:ring-primary focus:border-primary"
-                  />
-                </div>
-                <div className="space-y-1">
-                  <label className="text-[9px] font-bold text-on-surface-variant uppercase tracking-wide">Charged Fare (₹)</label>
-                  <input
-                    type="number"
-                    required
-                    value={chargedFare}
-                    onChange={(e) => setChargedFare(e.target.value)}
-                    placeholder="e.g. 150"
-                    className="w-full p-2.5 bg-surface-container-low border border-outline-variant/30 rounded-lg text-xs outline-none focus:ring-1 focus:ring-primary focus:border-primary"
-                  />
-                </div>
-              </div>
-
-              <div className="p-3 bg-surface-container-low rounded-xl border border-outline-variant/10 text-xs text-on-surface-variant">
-                <strong>Complaint Route:</strong> {startLoc} ➜ {destLoc}
-              </div>
-
-              <button
-                type="submit"
-                className="w-full py-3 rounded-xl bg-secondary text-on-secondary font-bold text-xs shadow-md hover:bg-secondary-container transition-colors cursor-pointer text-center"
+            {reportSuccess ? (
+              <motion.div 
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                className="text-center py-6 space-y-2 bg-green-50 border border-green-200 rounded-xl"
               >
-                File Overcharge Report
-              </button>
-            </form>
-          )}
+                <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center text-green-600 mx-auto">
+                  <CheckCircle2 size={24} />
+                </div>
+                <h4 className="text-xs font-bold text-green-700">Complaint Registered!</h4>
+                <p className="text-[10px] text-on-surface-variant max-w-xs mx-auto px-4">
+                  Thank you. Your report from <strong>{startLoc}</strong> to <strong>{destLoc}</strong> has been logged and is now visible below.
+                </p>
+              </motion.div>
+            ) : (
+              <form onSubmit={handleReportSubmit} className="space-y-3">
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="space-y-1">
+                    <label className="text-[9px] font-bold text-on-surface-variant uppercase tracking-wide">Vehicle No.</label>
+                    <input
+                      type="text"
+                      required
+                      value={vehicleNumber}
+                      onChange={(e) => setVehicleNumber(e.target.value)}
+                      placeholder="e.g. MH-15-X-1234"
+                      className="w-full p-2.5 bg-surface-container-low border border-outline-variant/30 rounded-lg text-xs outline-none focus:ring-1 focus:ring-primary focus:border-primary"
+                    />
+                  </div>
+                  <div className="space-y-1">
+                    <label className="text-[9px] font-bold text-on-surface-variant uppercase tracking-wide">Charged Fare (₹)</label>
+                    <input
+                      type="number"
+                      required
+                      value={chargedFare}
+                      onChange={(e) => setChargedFare(e.target.value)}
+                      placeholder="e.g. 150"
+                      className="w-full p-2.5 bg-surface-container-low border border-outline-variant/30 rounded-lg text-xs outline-none focus:ring-1 focus:ring-primary focus:border-primary"
+                    />
+                  </div>
+                </div>
+
+                <div className="p-3 bg-surface-container-low rounded-xl border border-outline-variant/10 text-xs text-on-surface-variant">
+                  <strong>Complaint Route:</strong> {startLoc} ➜ {destLoc}
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full py-3 rounded-xl bg-secondary text-on-secondary font-bold text-xs shadow-md hover:bg-secondary-container transition-colors cursor-pointer text-center"
+                >
+                  File Overcharge Report
+                </button>
+              </form>
+            )}
+          </div>
+
+          {/* Community Verified Fare Ratings (by Nashikkars) */}
+          <div className="bg-surface-container-lowest border border-outline-variant/30 rounded-2xl p-5 sacred-shadow space-y-4">
+            <h3 className="text-sm font-bold text-on-surface flex items-center gap-2 border-b border-outline-variant/10 pb-2">
+              <span className="material-symbols-outlined text-primary text-lg" style={{ fontVariationSettings: "'FILL' 1" }}>
+                stars
+              </span>
+              Nashikkar Community Verified Fares
+            </h3>
+            
+            {fareRatings.length === 0 ? (
+              <div className="text-center py-4">
+                <p className="text-[10px] text-outline">No community verified fares logged yet.</p>
+              </div>
+            ) : (
+              <div className="space-y-2.5 max-h-[250px] overflow-y-auto no-scrollbar">
+                {fareRatings.map((item) => (
+                  <div key={item.id} className="p-3 bg-surface-container-low border border-outline-variant/15 rounded-xl text-[11px] space-y-1">
+                    <div className="flex justify-between items-start gap-2">
+                      <span className="font-extrabold text-on-surface leading-tight">{item.route}</span>
+                      <span className="text-[10px] text-amber-500 font-extrabold flex items-center gap-0.5 shrink-0">
+                        ★ {item.rating}
+                      </span>
+                    </div>
+                    <div className="flex justify-between items-center text-[10px]">
+                      <span className="text-on-surface-variant">{item.vehicle}</span>
+                      <span className="font-black text-primary text-xs">₹{item.fare}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
 
         {/* RIGHT: Recent Overcharge Reports Log */}

@@ -35,6 +35,7 @@ interface Ghat {
   lng: number;
   flowSpeed: string;
   lastUpdated: string;
+  region: string;
   distance?: number;
 }
 
@@ -55,10 +56,11 @@ const initialGhats: Ghat[] = [
     crowdLevel: "HIGH",
     flagColor: "RED",
     desc: "Holy spot of Asthi Visarjan. High crowd density due to auspicious bathing hour. RTO restrictions active.",
-    lat: 20.0092,
-    lng: 73.7915,
+    lat: 20.0087,
+    lng: 73.7899,
     flowSpeed: "1.2 m/s (Fast)",
-    lastUpdated: "5 mins ago"
+    lastUpdated: "5 mins ago",
+    region: "Nashik"
   },
   {
     id: "ghat-2",
@@ -66,21 +68,23 @@ const initialGhats: Ghat[] = [
     crowdLevel: "MODERATE",
     flagColor: "YELLOW",
     desc: "Bathing ghat downstream. Moderate crowds. Ideal for families looking for peaceful holy dip.",
-    lat: 20.0158,
-    lng: 73.7995,
+    lat: 20.0014,
+    lng: 73.7963,
     flowSpeed: "0.8 m/s (Moderate)",
-    lastUpdated: "12 mins ago"
+    lastUpdated: "12 mins ago",
+    region: "Nashik"
   },
   {
     id: "ghat-3",
-    name: "Lakshman Kund",
+    name: "Laxman Kund",
     crowdLevel: "LOW",
     flagColor: "GREEN",
     desc: "Spacious bathing site with dedicated volunteers and security barricades. Highly recommended.",
-    lat: 20.0078,
-    lng: 73.7885,
+    lat: 20.0081,
+    lng: 73.7893,
     flowSpeed: "0.5 m/s (Calm)",
-    lastUpdated: "20 mins ago"
+    lastUpdated: "20 mins ago",
+    region: "Nashik"
   },
   {
     id: "ghat-4",
@@ -88,21 +92,23 @@ const initialGhats: Ghat[] = [
     crowdLevel: "HIGH",
     flagColor: "RED",
     desc: "The sacred source of the Godavari river in Trimbakeshwar. Extremely crowded during Shahi Snan.",
-    lat: 19.9324,
-    lng: 73.5303,
+    lat: 19.9327,
+    lng: 73.5276,
     flowSpeed: "0.2 m/s (Still)",
-    lastUpdated: "10 mins ago"
+    lastUpdated: "10 mins ago",
+    region: "Trimbakeshwar"
   },
   {
     id: "ghat-5",
     name: "Ahilya Godavari Sangam Ghat",
     crowdLevel: "MODERATE",
     flagColor: "YELLOW",
-    desc: "Confluence of rivers. Great alternative for pilgrims wanting to avoid the Ram Kund rush.",
-    lat: 20.0069,
-    lng: 73.7850,
+    desc: "Confluence of Godavari and Ahilya rivers near Trimbakeshwar Temple. Highly significant for ancestral rituals.",
+    lat: 19.9323,
+    lng: 73.5322,
     flowSpeed: "0.9 m/s (Moderate)",
-    lastUpdated: "15 mins ago"
+    lastUpdated: "15 mins ago",
+    region: "Trimbakeshwar"
   },
   {
     id: "ghat-6",
@@ -110,10 +116,11 @@ const initialGhats: Ghat[] = [
     crowdLevel: "LOW",
     flagColor: "GREEN",
     desc: "Serene bathing spot near Someshwar Temple. Scenic, clean, and highly secure for elderly.",
-    lat: 19.9855,
-    lng: 73.7310,
+    lat: 20.0231,
+    lng: 73.7278,
     flowSpeed: "0.6 m/s (Calm)",
-    lastUpdated: "1 hour ago"
+    lastUpdated: "1 hour ago",
+    region: "Nashik"
   },
   {
     id: "ghat-7",
@@ -121,32 +128,11 @@ const initialGhats: Ghat[] = [
     crowdLevel: "LOW",
     flagColor: "GREEN",
     desc: "A quiet, sacred pool situated near Sita Gufa in Tapovan. Frequented by devotees looking for serene prayers.",
-    lat: 20.0135,
-    lng: 73.7858,
+    lat: 20.0079,
+    lng: 73.7898,
     flowSpeed: "0.3 m/s (Still)",
-    lastUpdated: "15 mins ago"
-  },
-  {
-    id: "ghat-8",
-    name: "Surya Kund",
-    crowdLevel: "MODERATE",
-    flagColor: "YELLOW",
-    desc: "Bathing pond dedicated to the Sun God. Located downstream on the Panchavati riverbanks.",
-    lat: 20.0098,
-    lng: 73.7930,
-    flowSpeed: "0.7 m/s (Moderate)",
-    lastUpdated: "30 mins ago"
-  },
-  {
-    id: "ghat-9",
-    name: "Ahilya Kund",
-    crowdLevel: "LOW",
-    flagColor: "GREEN",
-    desc: "Sacred tank near the main Godavari flow named after Queen Ahilyabai Holkar. Clean and well-barricaded.",
-    lat: 20.0089,
-    lng: 73.7908,
-    flowSpeed: "0.4 m/s (Calm)",
-    lastUpdated: "45 mins ago"
+    lastUpdated: "15 mins ago",
+    region: "Nashik"
   },
   {
     id: "ghat-10",
@@ -154,10 +140,11 @@ const initialGhats: Ghat[] = [
     crowdLevel: "MODERATE",
     flagColor: "YELLOW",
     desc: "Sacred pond near Trimbakeshwar Temple. Believed to be where Sage Gautama performed penance to bring the Godavari down.",
-    lat: 19.9332,
-    lng: 73.5315,
+    lat: 19.9310,
+    lng: 73.5303,
     flowSpeed: "0.2 m/s (Still)",
-    lastUpdated: "10 mins ago"
+    lastUpdated: "10 mins ago",
+    region: "Trimbakeshwar"
   }
 ];
 
@@ -187,7 +174,8 @@ export default function GhatsMonitor() {
         lat: g.lat,
         lng: g.lng,
         flowSpeed: g.flow_speed,
-        lastUpdated: g.last_updated
+        lastUpdated: g.last_updated,
+        region: g.region || "Nashik"
       }));
 
       if (uLat && uLng) {
@@ -512,7 +500,7 @@ export default function GhatsMonitor() {
                   <h3 className="text-xl font-bold text-on-surface">{selectedGhat.name}</h3>
                   <p className="text-xs text-on-surface-variant flex items-center gap-1 mt-1">
                     <MapPin size={14} className="text-secondary" />
-                    Nashik Trimbakeshwar Region
+                    {selectedGhat.region} Region
                   </p>
                 </div>
 
@@ -541,7 +529,7 @@ export default function GhatsMonitor() {
 
                 <div className="flex gap-3">
                   <a
-                    href={`https://www.google.com/maps/dir/?api=1&destination=${selectedGhat.lat},${selectedGhat.lng}`}
+                    href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(selectedGhat.name + ", " + selectedGhat.region + ", Maharashtra, India")}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex-1 py-3 rounded-xl border border-primary text-primary font-bold text-center text-xs hover:bg-primary/5 transition-all flex items-center justify-center gap-1.5"

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import Groq from "groq-sdk";
+import { supabase } from "@/lib/supabaseClient";
 
 const SYSTEM_PROMPT = `You are the official AI Guide for KumbhAarambh — the Nashik Simhastha Kumbh Mela companion app.
 
@@ -12,7 +13,7 @@ Your role:
 
 Key facts about Nashik Simhastha:
 - Held every 12 years at Nashik-Trimbakeshwar on the banks of River Godavari
-- Key bathing ghats: Ram Kund, Talkuteshwar Ghat, Lakshman Kund
+- Key bathing ghats: Ram Kund, Talkuteshwar Ghat, Laxman Kund
 - Main temples: Trimbakeshwar Shiva Temple (Jyotirlinga), Kalaram Temple, Kapaleshwar Temple
 - Panchavati area is where Lord Rama stayed during exile
 - Key transit points: Nashik Railway Station, CBS Bus Stand
@@ -73,12 +74,14 @@ const BACKEND_FOOD = [
 ];
 
 const BACKEND_GHATS = [
-  { name: "Ram Kund (Main Ghat)", lat: 20.0092, lng: 73.7915, type: "Ghat" },
-  { name: "Talkuteshwar Ghat", lat: 20.0158, lng: 73.7995, type: "Ghat" },
-  { name: "Lakshman Kund", lat: 20.0078, lng: 73.7885, type: "Ghat" },
-  { name: "Kushavarta Kund", lat: 19.9324, lng: 73.5303, type: "Ghat" },
-  { name: "Ahilya Godavari Sangam Ghat", lat: 20.0069, lng: 73.7850, type: "Ghat" },
-  { name: "Someshwar Ghat", lat: 19.9855, lng: 73.7310, type: "Ghat" }
+  { name: "Ram Kund (Main Ghat)", lat: 20.0087, lng: 73.7899, type: "Ghat", region: "Nashik" },
+  { name: "Talkuteshwar Ghat", lat: 20.0014, lng: 73.7963, type: "Ghat", region: "Nashik" },
+  { name: "Laxman Kund", lat: 20.0081, lng: 73.7893, type: "Ghat", region: "Nashik" },
+  { name: "Kushavarta Kund", lat: 19.9327, lng: 73.5276, type: "Ghat", region: "Trimbakeshwar" },
+  { name: "Ahilya Godavari Sangam Ghat", lat: 19.9323, lng: 73.5322, type: "Ghat", region: "Trimbakeshwar" },
+  { name: "Someshwar Ghat", lat: 20.0231, lng: 73.7278, type: "Ghat", region: "Nashik" },
+  { name: "Sita Kund", lat: 20.0079, lng: 73.7898, type: "Ghat", region: "Nashik" },
+  { name: "Gautama Kund", lat: 19.9310, lng: 73.5303, type: "Ghat", region: "Trimbakeshwar" }
 ];
 
 function getDistance(lat1: number, lon1: number, lat2: number, lon2: number) {
@@ -116,30 +119,76 @@ export async function POST(req: NextRequest) {
 
     const groqApiKey = process.env.GROQ_API_KEY;
 
+    // Fetch stays, food spots, and ghats in real-time from Supabase database
+    const [staysRes, foodRes, ghatsRes] = await Promise.all([
+      supabase.from("stays").select("*"),
+      supabase.from("food_spots").select("*"),
+      supabase.from("ghats").select("*"),
+    ]);
+
+    const staysList = (staysRes.data || []).map((s: any) => ({
+      name: s.title,
+      lat: s.lat,
+      lng: s.lng,
+      price: s.price,
+      type: s.category,
+      address: s.address,
+    }));
+
+    const foodList = (foodRes.data || []).map((f: any) => ({
+      name: f.name,
+      lat: f.lat,
+      lng: f.lng,
+      price: f.price,
+      type: f.category,
+      specialty: f.specialty,
+    }));
+
+    const ghatsList = (ghatsRes.data || []).map((g: any) => ({
+      name: g.name,
+      lat: g.lat,
+      lng: g.lng,
+      type: "Ghat",
+      region: g.region,
+    }));
+
+    // Construct the database context dynamically
+    const databaseContext = `\n\n[VERIFIED PLACES DATABASE (SUPABASE)]
+Here is the real-time list of verified Stays and Food Spots available in our database. Rely on these when answering questions about local recommendations:
+Stays:
+${staysList.map(s => `- ${s.name} (${s.type}, Price: ${s.price}) located at ${s.address} [Coords: ${s.lat.toFixed(4)}, ${s.lng.toFixed(4)}]`).join("\n")}
+
+Food Spots:
+${foodList.map(f => `- ${f.name} (${f.type}, Specialty: ${f.specialty}, Price: ${f.price}) [Coords: ${f.lat.toFixed(4)}, ${f.lng.toFixed(4)}]`).join("\n")}
+
+Bathing Ghats:
+${ghatsList.map(g => `- ${g.name} in ${g.region} [Coords: ${g.lat.toFixed(4)}, ${g.lng.toFixed(4)}]`).join("\n")}
+`;
+
     let locationContext = "";
     if (location && typeof location.lat === "number" && typeof location.lng === "number") {
       const userLat = location.lat;
       const userLng = location.lng;
 
-      const staysWithDist = BACKEND_STAYS.map((s) => ({
+      const staysWithDist = staysList.map((s) => ({
         ...s,
         dist: getDistance(userLat, userLng, s.lat, s.lng),
       })).sort((a, b) => a.dist - b.dist);
 
-      const foodWithDist = BACKEND_FOOD.map((f) => ({
+      const foodWithDist = foodList.map((f) => ({
         ...f,
         dist: getDistance(userLat, userLng, f.lat, f.lng),
       })).sort((a, b) => a.dist - b.dist);
 
-      const ghatsWithDist = BACKEND_GHATS.map((g) => ({
+      const ghatsWithDist = ghatsList.map((g) => ({
         ...g,
         dist: getDistance(userLat, userLng, g.lat, g.lng),
       })).sort((a, b) => a.dist - b.dist);
 
-      locationContext = `\n\n[USER LOCATION CONTEXT]\nUser live coordinates: Latitude ${userLat.toFixed(4)}, Longitude ${userLng.toFixed(4)}.\nNearest Stays (Local Dataset):\n1. ${staysWithDist[0].name} - ${staysWithDist[0].dist.toFixed(2)} km away.\n2. ${staysWithDist[1].name} - ${staysWithDist[1].dist.toFixed(2)} km away.\n\nNearest Food Spots (Local Dataset):\n1. ${foodWithDist[0].name} - ${foodWithDist[0].dist.toFixed(2)} km away.\n2. ${foodWithDist[1].name} - ${foodWithDist[1].dist.toFixed(2)} km away.\n\nNearest Ghats (Local Dataset):\n1. ${ghatsWithDist[0].name} - ${ghatsWithDist[0].dist.toFixed(2)} km away.\n\nPlease suggest these nearby options contextually, BUT DO NOT STOP HERE. Execute the [INTERNET MAP RETRIEVAL DIRECTIVE] and combine these with additional real locations from your internal web knowledge base. Advise them on transit options if needed.`;
+      locationContext = `\n\n[USER LOCATION CONTEXT]\nUser live coordinates: Latitude ${userLat.toFixed(4)}, Longitude ${userLng.toFixed(4)}.\nNearest Stays (from database):\n${staysWithDist.slice(0, 3).map((s, idx) => `${idx+1}. ${s.name} - ${s.dist.toFixed(2)} km away.`).join("\n")}\n\nNearest Food Spots (from database):\n${foodWithDist.slice(0, 3).map((f, idx) => `${idx+1}. ${f.name} - ${f.dist.toFixed(2)} km away.`).join("\n")}\n\nNearest Ghats (from database):\n${ghatsWithDist.slice(0, 3).map((g, idx) => `${idx+1}. ${g.name} - ${g.dist.toFixed(2)} km away.`).join("\n")}\n\nPlease suggest these nearby options contextually, BUT DO NOT STOP HERE. Execute the [INTERNET MAP RETRIEVAL DIRECTIVE] and combine these with additional real locations from your internal web knowledge base. Advise them on transit options if needed.`;
     }
 
-    const activeSystemPrompt = SYSTEM_PROMPT + locationContext;
+    const activeSystemPrompt = SYSTEM_PROMPT + databaseContext + locationContext;
 
     // Try Groq if key is present
     if (groqApiKey && !groqApiKey.includes("placeholder") && groqApiKey !== "") {
@@ -169,7 +218,7 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // 3. Fallback to offline rule-based matches
+    // Fallback to offline rule-based matches
     return NextResponse.json({ reply: getOfflineReply(message) });
 
   } catch (error: any) {

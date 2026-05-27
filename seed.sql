@@ -65,7 +65,8 @@ CREATE TABLE IF NOT EXISTS ghats (
     lat DOUBLE PRECISION NOT NULL,
     lng DOUBLE PRECISION NOT NULL,
     flow_speed TEXT NOT NULL,
-    last_updated TEXT NOT NULL
+    last_updated TEXT NOT NULL,
+    region TEXT NOT NULL DEFAULT 'Nashik'
 );
 
 -- 6. OVERCHARGE REPORTS TABLE
@@ -94,6 +95,16 @@ CREATE TABLE IF NOT EXISTS lost_items (
     created_at TIMESTAMPTZ DEFAULT now()
 );
 
+-- 8. FARE RATINGS TABLE
+CREATE TABLE IF NOT EXISTS fare_ratings (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    route TEXT NOT NULL,
+    vehicle TEXT NOT NULL,
+    fare INT NOT NULL,
+    rating INT NOT NULL CHECK (rating >= 1 AND rating <= 5),
+    created_at TIMESTAMPTZ DEFAULT now()
+);
+
 -- Enable Realtime subscriptions for all tables (safe drop-and-readd to avoid duplicate membership errors)
 DO $$ BEGIN ALTER PUBLICATION supabase_realtime DROP TABLE stays; EXCEPTION WHEN OTHERS THEN NULL; END $$;
 DO $$ BEGIN ALTER PUBLICATION supabase_realtime DROP TABLE bookings; EXCEPTION WHEN OTHERS THEN NULL; END $$;
@@ -102,8 +113,9 @@ DO $$ BEGIN ALTER PUBLICATION supabase_realtime DROP TABLE reviews; EXCEPTION WH
 DO $$ BEGIN ALTER PUBLICATION supabase_realtime DROP TABLE ghats; EXCEPTION WHEN OTHERS THEN NULL; END $$;
 DO $$ BEGIN ALTER PUBLICATION supabase_realtime DROP TABLE overcharge_reports; EXCEPTION WHEN OTHERS THEN NULL; END $$;
 DO $$ BEGIN ALTER PUBLICATION supabase_realtime DROP TABLE lost_items; EXCEPTION WHEN OTHERS THEN NULL; END $$;
+DO $$ BEGIN ALTER PUBLICATION supabase_realtime DROP TABLE fare_ratings; EXCEPTION WHEN OTHERS THEN NULL; END $$;
 
-ALTER PUBLICATION supabase_realtime ADD TABLE stays, bookings, food_spots, reviews, ghats, overcharge_reports, lost_items;
+ALTER PUBLICATION supabase_realtime ADD TABLE stays, bookings, food_spots, reviews, ghats, overcharge_reports, lost_items, fare_ratings;
 
 -- Enable RLS on all tables
 ALTER TABLE stays ENABLE ROW LEVEL SECURITY;
@@ -113,6 +125,7 @@ ALTER TABLE reviews ENABLE ROW LEVEL SECURITY;
 ALTER TABLE ghats ENABLE ROW LEVEL SECURITY;
 ALTER TABLE overcharge_reports ENABLE ROW LEVEL SECURITY;
 ALTER TABLE lost_items ENABLE ROW LEVEL SECURITY;
+ALTER TABLE fare_ratings ENABLE ROW LEVEL SECURITY;
 
 -- Public READ access for all tables (anyone can view)
 DROP POLICY IF EXISTS "Public read stays" ON stays;
@@ -136,6 +149,9 @@ CREATE POLICY "Public read overcharge_reports" ON overcharge_reports FOR SELECT 
 DROP POLICY IF EXISTS "Public read lost_items" ON lost_items;
 CREATE POLICY "Public read lost_items" ON lost_items FOR SELECT USING (true);
 
+DROP POLICY IF EXISTS "Public read fare_ratings" ON fare_ratings;
+CREATE POLICY "Public read fare_ratings" ON fare_ratings FOR SELECT USING (true);
+
 -- Public INSERT access for user-submitted data
 DROP POLICY IF EXISTS "Public insert reviews" ON reviews;
 CREATE POLICY "Public insert reviews" ON reviews FOR INSERT WITH CHECK (true);
@@ -155,6 +171,9 @@ CREATE POLICY "Public insert food_spots" ON food_spots FOR INSERT WITH CHECK (tr
 DROP POLICY IF EXISTS "Public insert lost_items" ON lost_items;
 CREATE POLICY "Public insert lost_items" ON lost_items FOR INSERT WITH CHECK (true);
 
+DROP POLICY IF EXISTS "Public insert fare_ratings" ON fare_ratings;
+CREATE POLICY "Public insert fare_ratings" ON fare_ratings FOR INSERT WITH CHECK (true);
+
 -- Public UPDATE for ghats (crowd status updates from Nashikkar)
 DROP POLICY IF EXISTS "Public update ghats" ON ghats;
 CREATE POLICY "Public update ghats" ON ghats FOR UPDATE USING (true) WITH CHECK (true);
@@ -170,20 +189,21 @@ TRUNCATE TABLE stays CASCADE;
 TRUNCATE TABLE food_spots CASCADE;
 TRUNCATE TABLE ghats CASCADE;
 TRUNCATE TABLE lost_items CASCADE;
+TRUNCATE TABLE fare_ratings CASCADE;
+
 
 
 -- SEED GHATS
-INSERT INTO ghats (id, name, crowd_level, flag_color, "desc", lat, lng, flow_speed, last_updated) VALUES
-('ghat-1', 'Ram Kund (Main Ghat)', 'HIGH', 'RED', 'Holy spot of Asthi Visarjan. High crowd density due to auspicious bathing hour. RTO restrictions active.', 20.0062, 73.7885, '1.2 m/s (Fast)', '5 mins ago'),
-('ghat-2', 'Talkuteshwar Ghat', 'MODERATE', 'YELLOW', 'Bathing ghat downstream. Moderate crowds. Ideal for families looking for peaceful holy dip.', 20.0098, 73.7990, '0.8 m/s (Moderate)', '12 mins ago'),
-('ghat-3', 'Lakshman Kund', 'LOW', 'GREEN', 'Spacious bathing site with dedicated volunteers and security barricades. Highly recommended.', 20.0075, 73.7885, '0.5 m/s (Calm)', '20 mins ago'),
-('ghat-4', 'Kushavarta Kund', 'HIGH', 'RED', 'The sacred source of the Godavari river in Trimbakeshwar. Extremely crowded during Shahi Snan.', 19.9327, 73.5277, '0.2 m/s (Still)', '10 mins ago'),
-('ghat-5', 'Ahilya Godavari Sangam Ghat', 'MODERATE', 'YELLOW', 'Confluence of rivers. Great alternative for pilgrims wanting to avoid the Ram Kund rush.', 19.9304, 73.5272, '0.9 m/s (Moderate)', '15 mins ago'),
-('ghat-6', 'Someshwar Ghat', 'LOW', 'GREEN', 'Serene bathing spot near Someshwar Temple. Scenic, clean, and highly secure for elderly.', 19.9964, 73.7466, '0.6 m/s (Calm)', '1 hour ago'),
-('ghat-7', 'Sita Kund', 'LOW', 'GREEN', 'A quiet, sacred pool situated near Sita Gufa in Tapovan. Frequented by devotees looking for serene prayers.', 20.0069, 73.7950, '0.3 m/s (Still)', '15 mins ago'),
-('ghat-8', 'Surya Kund', 'MODERATE', 'YELLOW', 'Bathing pond dedicated to the Sun God. Located downstream on the Panchavati riverbanks.', 20.0065, 73.7892, '0.7 m/s (Moderate)', '30 mins ago'),
-('ghat-9', 'Ahilya Kund', 'LOW', 'GREEN', 'Sacred tank near the main Godavari flow named after Queen Ahilyabai Holkar. Clean and well-barricaded.', 20.0060, 73.7889, '0.4 m/s (Calm)', '45 mins ago'),
-('ghat-10', 'Gautama Kund', 'MODERATE', 'YELLOW', 'Sacred pond near Trimbakeshwar Temple. Believed to be where Sage Gautama performed penance to bring the Godavari down.', 19.9332, 73.5315, '0.2 m/s (Still)', '10 mins ago');
+INSERT INTO ghats (id, name, crowd_level, flag_color, "desc", lat, lng, flow_speed, last_updated, region) VALUES
+('ghat-1', 'Ram Kund (Main Ghat)', 'HIGH', 'RED', 'Holy spot of Asthi Visarjan. High crowd density due to auspicious bathing hour. RTO restrictions active.', 20.0087, 73.7899, '1.2 m/s (Fast)', '5 mins ago', 'Nashik'),
+('ghat-2', 'Talkuteshwar Ghat', 'MODERATE', 'YELLOW', 'Bathing ghat downstream. Moderate crowds. Ideal for families looking for peaceful holy dip.', 20.0014, 73.7963, '0.8 m/s (Moderate)', '12 mins ago', 'Nashik'),
+('ghat-3', 'Laxman Kund', 'LOW', 'GREEN', 'Spacious bathing site with dedicated volunteers and security barricades. Highly recommended.', 20.0081, 73.7893, '0.5 m/s (Calm)', '20 mins ago', 'Nashik'),
+('ghat-4', 'Kushavarta Kund', 'HIGH', 'RED', 'The sacred source of the Godavari river in Trimbakeshwar. Extremely crowded during Shahi Snan.', 19.9327, 73.5276, '0.2 m/s (Still)', '10 mins ago', 'Trimbakeshwar'),
+('ghat-5', 'Ahilya Godavari Sangam Ghat', 'MODERATE', 'YELLOW', 'Confluence of Godavari and Ahilya rivers near Trimbakeshwar Temple. Highly significant for ancestral rituals.', 19.9323, 73.5322, '0.9 m/s (Moderate)', '15 mins ago', 'Trimbakeshwar'),
+('ghat-6', 'Someshwar Ghat', 'LOW', 'GREEN', 'Serene bathing spot near Someshwar Temple. Scenic, clean, and highly secure for elderly.', 20.0231, 73.7278, '0.6 m/s (Calm)', '1 hour ago', 'Nashik'),
+('ghat-7', 'Sita Kund', 'LOW', 'GREEN', 'A quiet, sacred pool situated near Sita Gufa in Tapovan. Frequented by devotees looking for serene prayers.', 20.0079, 73.7898, '0.3 m/s (Still)', '15 mins ago', 'Nashik'),
+('ghat-10', 'Gautama Kund', 'MODERATE', 'YELLOW', 'Sacred pond near Trimbakeshwar Temple. Believed to be where Sage Gautama performed penance to bring the Godavari down.', 19.9310, 73.5303, '0.2 m/s (Still)', '10 mins ago', 'Trimbakeshwar');
+
 
 -- SEED FOOD SPOTS (Street stalls, Chaat corners, Thalis, and Restaurants)
 INSERT INTO food_spots (name, category, price, address, lat, lng, rating, likes, specialty, "desc", verified_count) VALUES
