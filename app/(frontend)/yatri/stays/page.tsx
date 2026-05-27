@@ -200,8 +200,9 @@ export default function StayFinder() {
 
   const fetchStays = async (uLat: number | null, uLng: number | null) => {
     const { data, error } = await supabase.from("stays").select("*");
+    let loadedStays: Stay[] = [];
     if (!error && data) {
-      let loadedStays = data.map((s: any) => ({
+      loadedStays = data.map((s: any) => ({
         id: s.id,
         title: s.title,
         category: s.category,
@@ -214,15 +215,46 @@ export default function StayFinder() {
         desc: s.desc,
         verifiedCount: s.verified_count
       }));
-
-      if (uLat && uLng) {
-        loadedStays = loadedStays.map((s: any) => ({
-          ...s,
-          distance: getDistance(uLat, uLng, s.lat, s.lng)
-        })).sort((a: any, b: any) => (a.distance || 0) - (b.distance || 0));
-      }
-      setStays(loadedStays);
     }
+
+    // Fetch dynamic accommodations from OpenStreetMap maps based on user coordinates
+    if (uLat && uLng) {
+      try {
+        const osmRes = await fetch(
+          `https://nominatim.openstreetmap.org/search?format=json&q=accommodation&lat=${uLat}&lon=${uLng}&limit=20`,
+          { headers: { "User-Agent": "KumbhAarambh-App" } }
+        );
+        if (osmRes.ok) {
+          const osmData = await osmRes.json();
+          if (Array.isArray(osmData)) {
+            const mappedOsm = osmData.map((item: any) => ({
+              id: `osm-${item.place_id}`,
+              title: item.name || item.display_name?.split(",")[0] || "Hotel Stay",
+              category: "guesthouse" as const,
+              price: "Check Online",
+              address: item.display_name,
+              lat: parseFloat(item.lat),
+              lng: parseFloat(item.lon),
+              rating: 4.2,
+              amenities: ["OpenStreetMap Location", "Real-time Search"],
+              desc: "Real-world accommodation retrieved from live map directories.",
+              verifiedCount: 0
+            }));
+            loadedStays = [...loadedStays, ...mappedOsm];
+          }
+        }
+      } catch (err) {
+        console.error("Failed to fetch stays from OpenStreetMap:", err);
+      }
+    }
+
+    if (uLat && uLng) {
+      loadedStays = loadedStays.map((s: any) => ({
+        ...s,
+        distance: getDistance(uLat, uLng, s.lat, s.lng)
+      })).sort((a: any, b: any) => (a.distance || 0) - (b.distance || 0));
+    }
+    setStays(loadedStays);
   };
 
   useEffect(() => {

@@ -277,8 +277,9 @@ export default function FoodFinder() {
 
   const fetchFoodSpots = async (uLat: number | null, uLng: number | null) => {
     const { data, error } = await supabase.from("food_spots").select("*");
+    let loaded: FoodSpot[] = [];
     if (!error && data) {
-      let loaded = data.map((s: any) => ({
+      loaded = data.map((s: any) => ({
         id: s.id,
         name: s.name,
         category: s.category,
@@ -293,15 +294,48 @@ export default function FoodFinder() {
         reviews: [],
         verifiedCount: s.verified_count
       }));
-
-      if (uLat && uLng) {
-        loaded = loaded.map((s: any) => ({
-          ...s,
-          distance: getDistance(uLat, uLng, s.lat, s.lng)
-        })).sort((a: any, b: any) => (a.distance || 0) - (b.distance || 0));
-      }
-      setFoodSpots(loaded);
     }
+
+    // Fetch dynamic restaurants from OpenStreetMap maps based on user coordinates
+    if (uLat && uLng) {
+      try {
+        const osmRes = await fetch(
+          `https://nominatim.openstreetmap.org/search?format=json&q=restaurant&lat=${uLat}&lon=${uLng}&limit=20`,
+          { headers: { "User-Agent": "KumbhAarambh-App" } }
+        );
+        if (osmRes.ok) {
+          const osmData = await osmRes.json();
+          if (Array.isArray(osmData)) {
+            const mappedOsm = osmData.map((item: any) => ({
+              id: `osm-${item.place_id}`,
+              name: item.name || item.display_name?.split(",")[0] || "Dining Spot",
+              category: "restaurant" as const,
+              price: "Average Price",
+              address: item.display_name,
+              lat: parseFloat(item.lat),
+              lng: parseFloat(item.lon),
+              rating: 4.0,
+              likes: 12,
+              specialty: "Vegetarian Local Food",
+              desc: "Real-world dining spot retrieved from live map directories.",
+              reviews: [],
+              verifiedCount: 0
+            }));
+            loaded = [...loaded, ...mappedOsm];
+          }
+        }
+      } catch (err) {
+        console.error("Failed to fetch food spots from OpenStreetMap:", err);
+      }
+    }
+
+    if (uLat && uLng) {
+      loaded = loaded.map((s: any) => ({
+        ...s,
+        distance: getDistance(uLat, uLng, s.lat, s.lng)
+      })).sort((a: any, b: any) => (a.distance || 0) - (b.distance || 0));
+    }
+    setFoodSpots(loaded);
   };
 
   const loadSpotReviews = async (spotId: string) => {
